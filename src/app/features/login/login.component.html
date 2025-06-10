@@ -1,0 +1,38 @@
+<div class="bg-[url('/bg3.jpg')] bg-cover bg-center min-h-screen flex items-center justify-center bg-gray-100 ">
+<div class="bg-[#FFFDD0] p-5 rounded-xl shadow-md w-full max-w-sm">
+<img src="logo2.png" class="h-25 w-65 ">    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="space-y-4" >
+      <!-- Email -->
+      <div class="flex items-center border border-gray-300 rounded-md shadow-sm px-3 py-2 bg-transparent">
+       <i class="fas fa-envelope mr-2 text-gray-500"></i>
+        <input  id="email" formControlName="email"  type="email" placeholder="Email" class="w-full outline-none text-base bg-transparent text-gray-700" />
+        <div *ngIf="submitted && f['email'].errors" class="text-sm text-red-500 mt-1">
+            <small *ngIf="f['email'].errors['required']">Email is required</small>
+            <small *ngIf="f['email'].errors['email']">Invalid email format </small>
+          </div>
+      </div>
+
+      <!-- Password -->
+      <div class="flex items-center border border-gray-300 rounded-md shadow-sm px-3 py-2 bg-transparent">
+        <i class="fas fa-lock mr-2 text-gray-500"></i>
+        <input id="password" formControlName="password" type="password" placeholder="Password" class="w-full outline-none text-base bg-transparent text-gray-700" />
+        <div *ngIf="submitted && f['password'].errors" class="text-sm text-red-500 mt-1">
+            <small *ngIf="f['password'].errors['required']">Password is required</small>
+            <small *ngIf="f['password'].errors['minlength']">Password too short</small>
+          </div>
+      </div>
+
+      <!-- Remember me -->
+      <div class="flex items-center">
+        <input type="checkbox" id="remember" class="mr-2" />
+        <label for="remember" class="text-sm text-gray-600">Remember me</label>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit"
+              class="w-full bg-blue-400 hover:bg-[#005ea8] text-white font-semibold py-2 rounded-md transition">
+        Log In
+      </button>
+    </form>
+  </div>
+</div>
