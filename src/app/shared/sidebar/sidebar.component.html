@@ -1,0 +1,99 @@
+<div class="fixed left-0 top-0 h-full w-65 bg-gray-200 border-r p-6">
+  <!-- Logo -->
+  <div class="mb-10 flex items-center space-x-4">
+    <img 
+      src="logo2.png" 
+      alt="Black Pebble Studios" 
+      class="h-20 w-43 rounded-full"
+    />
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <ul class="space-y-2 text-gray-800  font-bold text-base">
+
+    <li class="hover:bg-gray-200 p-2 rounded cursor-pointer flex items-center space-x-3">
+      <i class="fas fa-border-all text-xl"></i>
+      <span>Dashboard</span>
+    </li>
+    <li class="hover:bg-gray-200 p-2 rounded cursor-pointer flex items-center space-x-3">
+      <i class="fas fa-users text-xl"></i>  
+      <span>User Management</span>
+    </li>
+
+    <!-- Inventory Dropdown -->
+    <li>
+      <div 
+        (click)="toggleInventoryDropdown()" 
+        class="flex justify-between items-center hover:bg-gray-200 p-2 rounded cursor-pointer"
+      >
+     <div class="flex items-center space-x-3">
+          <i class="fas fa-list text-xl"></i>
+          <span>Inventory</span>
+        </div>
+        <svg 
+          [ngClass]="{ 'rotate-180': isInventoryDropdownOpen }"
+          class="w-4 h-4 transition-transform"
+          fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+
+      <ul 
+        class="ml-4 mt-2 space-y-1" 
+        [class.hidden]="!isInventoryDropdownOpen"
+      >
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+          Add Product</li>
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+          Add Table</li>
+      </ul>
+    </li>
+
+    <li class="hover:bg-gray-200 p-2 rounded cursor-pointer flex items-center space-x-3">
+      <i class="fas fa-utensils text-xl"></i>
+      <span>Orders</span>
+    </li>
+    
+     <li>
+      <div 
+        (click)="toggleReportDropdown()" 
+        class="flex justify-between items-center hover:bg-gray-200 p-2 rounded cursor-pointer"
+      >
+     <div class="flex items-center space-x-2">
+          <i class="fas fa-square-poll-vertical text-xl"></i>
+          <span>Reports</span>
+        </div>
+        <svg 
+          [ngClass]="{ 'rotate-180': isReportDropdownOpen }"
+          class="w-4 h-4 transition-transform"
+          fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+
+      <ul 
+        class="ml-4 mt-2 space-y-1" 
+        [class.hidden]="!isReportDropdownOpen"
+      >
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+          Daily Sales Summary</li>
+
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+          Sales Report</li>
+
+          <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+         Sales by Cashier</li>
+      </ul>
+    </li>
+
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer flex items-center space-x-3">
+        <i class="fas fa-right-from-bracket text-xl"></i>
+      <span>Log Out</span>
+    </li>
+
+  </ul>
+</div>
