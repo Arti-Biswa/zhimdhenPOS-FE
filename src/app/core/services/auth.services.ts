@@ -6,6 +6,7 @@ import { ApiService } from './api.service';
 import { UserService } from './user.service';
 import { LoginModel, LoginResponseModel } from '../model/login.model';
 import { User } from '../model/user.model';
+import { SignupModel } from '../model/signup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,11 @@ export class AuthService {
     );
   }
 
+  //SignUp Method
+  signup(signupData:User):Observable<any>{
+    return this.apiService.post('/auth/register',signupData);
+  }
+
   // Login method
   login(loginData: LoginModel): Observable<LoginResponseModel> {
     return this.apiService.post<LoginResponseModel>('/auth/login', loginData).pipe(
@@ -75,8 +81,10 @@ export class AuthService {
           id: response?.data?.user.id,
           // Map other properties from the response
           email: response?.data?.user.email,
-          name:response?.data?.user.email,
-          role:response?.data?.user.role
+          username: response?.data?.user.email,
+          role: response?.data?.user.role,
+          password: '',
+          phoneNumber: 0
         };
         
         this.userService.setCurrentUser(user);

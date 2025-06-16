@@ -6,16 +6,25 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class UserService {
+
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   
   currentUser$ = this.currentUserSubject.asObservable();
+  constructor(){
+    const storedUser=localStorage.getItem('user');
+    this.currentUserSubject =new BehaviorSubject<User|null>(
+      storedUser?JSON.parse(storedUser):null
+    );
+  }
 
   setCurrentUser(user: User) {
     this.currentUserSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   clearCurrentUser() {
     this.currentUserSubject.next(null);
+    localStorage.removeItem('user');
   }
 
   getCurrentUser(): User | null {
