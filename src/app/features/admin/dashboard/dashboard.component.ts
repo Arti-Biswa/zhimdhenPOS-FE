@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
+import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-dashboard',

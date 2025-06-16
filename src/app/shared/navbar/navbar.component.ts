@@ -5,6 +5,7 @@ import { User } from '../../core/model/user.model';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../core/services/auth.services';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +15,44 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavbarComponent {
 currentUser$: Observable<User | null>;
+userRole:string='';
+isAdmin:boolean=false;
+currentUrl:string='';
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
+
   ) {
     this.currentUser$ = this.authService.getCurrentUser();
+  }
+
+ngOnInit(): void {
+    const currentUser: User | null = this.userService.getCurrentUser();
+
+    if (currentUser && currentUser.role === 'ADMIN') {
+      this.isAdmin = true;
+      this.userRole = 'Admin';
+    } else if (currentUser?.role === 'CASHIER') {
+      this.userRole = 'Cashier';
+    }
+
+    this.router.events.subscribe(() => {
+      this.currentUrl = this.router.url;
+    });
+
+    // Initial route assignment
+    this.currentUrl = this.router.url;
+  }
+
+  goToCashier(): void {
+    this.router.navigate(['/staff/home']);
+  }
+
+  goToAdminDashboard(): void {
+    this.router.navigate(['/admin/dashboard']);
   }
 
   toggleSidebar(): void {
@@ -42,4 +74,7 @@ currentUser$: Observable<User | null>;
     this.router.navigate(['/settings']);
   }
 
+  onCashier(){
+    this.router.navigate(['staff/home']);
+  }
 }
