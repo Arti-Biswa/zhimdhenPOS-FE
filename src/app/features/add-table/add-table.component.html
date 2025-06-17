@@ -1,0 +1,36 @@
+<div class="flex flex-col h-screen">
+  <app-navbar class="z-10"></app-navbar>
+    <app-sidebar class="z-10"></app-sidebar>
+
+  <div class="flex flex-1 ml-64 overflow-y-auto">
+    <!-- Main content container with centered form -->
+    <div class="flex-1 flex items-center justify-center bg-gray-100 ">
+      <div class="bg-white shadow-md rounded-lg p-2 w-full max-w-xl">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Table</h2>
+
+        <form (ngSubmit)="addTable()" class="space-y-4">
+          <div>
+            <label class="block text-gray-600 font-medium mb-2">Table Number</label>
+            <input
+              type="text"
+              [(ngModel)]="tableNumber"
+              name="tableNumber"
+              class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter table number"
+            />
+            <div *ngIf="errorMessage" class="text-red-500 text-sm mt-1">
+              {{ errorMessage }}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-[#4EACB9] text-white px-4 py-2 rounded hover:bg-[#3b98a2]"
+          >
+            Add Table
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
