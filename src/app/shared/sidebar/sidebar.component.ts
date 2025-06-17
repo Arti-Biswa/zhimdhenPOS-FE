@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,12 +13,16 @@ export class SidebarComponent {
  isInventoryDropdownOpen = false;
  isReportDropdownOpen =false;
 
+ constructor (private router:Router){}
   toggleInventoryDropdown(): void {
     this.isInventoryDropdownOpen = !this.isInventoryDropdownOpen;
   }
 
   toggleReportDropdown():void{
     this.isReportDropdownOpen = !this.isReportDropdownOpen;
+  }
+onLogout(){
+    this.router.navigate(['/']);
   }
 }
 

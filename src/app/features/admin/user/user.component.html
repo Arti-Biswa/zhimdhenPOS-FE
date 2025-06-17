@@ -1,1 +1,90 @@
-<p>user works!</p>
+<div class="flex flex-col h-screen">
+  <app-navbar class="z-10"></app-navbar>
+  <app-sidebar class="z-10"></app-sidebar>
+  <main class="flex-1 p-6 ml-64 overflow-y-auto bg-[#F2F2CB]">
+  <form #form="ngForm" (ngSubmit)="saveUser(form)"class="max-w-2xl mx-auto p-6 bg-white rounded shadow space-y-6">
+
+    <h1 class=" flex justify-center font-bold text-xl text-gray-800">User Form</h1>
+  <div>
+    <input
+    name="username"
+    [(ngModel)]="user.username"
+      type="text"
+      id="username"
+      placeholder="Username"
+      class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      required
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <input
+      name="email"
+      [(ngModel)]="user.email"
+        type="email"
+        id="inputEmail4"
+        placeholder="Email"
+        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+    </div>
+    <div>
+      <input
+      name="password"
+      [(ngModel)]="user.password"
+        type="password"
+        id="inputPassword4"
+        placeholder="Password"
+        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <input
+      name="phoneNumber"
+      [(ngModel)]="user.phoneNumber"
+        type="text"
+        id="PhoneNumber"
+        placeholder="Phone Number"
+        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+    </div>
+    <div>
+      <select
+  name="role"
+  [(ngModel)]="user.role"
+  id="inputState"
+  class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  required
+>
+  <option value="" disabled selected>Select Role</option>
+  <option [ngValue]="Role.ADMIN">Admin</option>
+  <option [ngValue]="Role.CASHIER">Cashier</option>
+</select>
+
+    </div>
+  </div>
+
+  <div class="flex justify-center gap-8">
+    <button
+      type="submit"
+      class="w-half bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200 cursor-pointer"
+    >
+      Sign Up
+    </button>
+     <button
+      (click)="cancel()"
+      class="w-half bg-red-400 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-200 cursor-pointer"
+    >
+     Cancel
+    </button>
+  </div>
+</form>
+
+  </main>
+</div>

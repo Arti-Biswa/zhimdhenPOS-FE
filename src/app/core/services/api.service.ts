@@ -30,4 +30,7 @@ export class ApiService {
   getuser(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/users`);
   }
+  getUserByRole(role:'ADMIN'|'CASHIER'):Observable<any>{
+    return this.http.get(`${this.baseUrl}/users?role=${role}`);
+  }
 }
