@@ -6,6 +6,7 @@ import { AddTableComponent } from './features/add-table/add-table.component';
 import { OrderComponent } from './features/order/order.component';
 import { UserComponent } from './features/admin/user/user.component';
 import { UserListComponent } from './features/admin/user-list/user-list.component';
+import { UserUpdateComponent } from './features/admin/user-update/user-update.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -16,4 +17,7 @@ export const routes: Routes = [
     {path: 'order', component: OrderComponent}
     {path:'admin/user',component:UserComponent},
     {path:'admin/user-list',component:UserListComponent}
+    {path:'admin/user-list',component:UserListComponent},
+    {path:'admin/user-update/:id',component:UserUpdateComponent}
+
 ];

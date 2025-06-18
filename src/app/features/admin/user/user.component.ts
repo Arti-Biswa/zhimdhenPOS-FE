@@ -33,6 +33,7 @@ constructor (private authService:AuthService, private router:Router){}
       next: (res) => {
         console.log('User registered successfully:', res);
         alert('User created successfully!');
+        this.router.navigate(['admin/user-list']);
         form.resetForm();
       },
       error: (err) => {

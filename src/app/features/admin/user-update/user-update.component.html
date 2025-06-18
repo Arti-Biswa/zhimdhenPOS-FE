@@ -1,0 +1,65 @@
+<div class="flex flex-col h-screen">
+  <app-navbar class="z-10"></app-navbar>
+  <app-sidebar class="z-10"></app-sidebar>
+
+  <main class="flex-1 p-6 ml-64 overflow-y-auto bg-[#F2F2CB]">
+   <form *ngIf="user" #form="ngForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto p-6 bg-white rounded shadow space-y-6">
+  <!-- Username -->
+  <div>
+    <input
+      name="username"
+      [ngModel]="user.username"
+      type="text"
+      placeholder="Username"
+      class="w-full border border-gray-300 p-2 rounded"
+      required
+    />
+  </div>
+
+  <!-- Email -->
+  <div>
+    <input
+      name="email"
+      [(ngModel)]="user.email"
+      type="email"
+      placeholder="Email"
+      class="w-full border border-gray-300 p-2 rounded"
+      required
+    />
+  </div>
+
+  <!-- Phone Number -->
+  <div>
+    <input
+      name="phoneNumber"
+      [(ngModel)]="user.phoneNumber"
+      type="text"
+      placeholder="Phone Number"
+      class="w-full border border-gray-300 p-2 rounded"
+      required
+    />
+  </div>
+
+  <!-- Role -->
+  <div>
+    <select
+      name="role"
+      [(ngModel)]="user.role"
+      class="w-full border border-gray-300 p-2 rounded"
+      required
+    >
+      <option [ngValue]="''" disabled>Select Role</option>
+      <option [ngValue]="Role.ADMIN">Admin</option>
+      <option [ngValue]="Role.CASHIER">Cashier</option>
+    </select>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex justify-center gap-8">
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded cursor-pointer">Update</button>
+    <button type="button" (click)="cancel()" class="bg-red-400 text-white py-2 px-4 rounded">Cancel</button>
+  </div>
+</form>
+
+  </main>
+</div>
