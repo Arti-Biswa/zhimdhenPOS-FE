@@ -10,7 +10,7 @@
     <div class="flex items-center space-x-4">
     <ng-container *ngIf="isAdmin">
     <button 
-      *ngIf="currentUrl.includes('admin/dashboard')" 
+      *ngIf="currentUrl.includes('admin')" 
       (click)="goToCashier()" 
       class="text-gray-600 hover:text-gray-700 relative mt-9 mr-10 cursor-pointer"
       title="Go to Cashier Dashboard">

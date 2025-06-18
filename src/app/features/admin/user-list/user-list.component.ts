@@ -50,5 +50,9 @@ export class UserListComponent {
   createUser(){
     this.router.navigate(['admin/user']);
   }
+
+ onUpdate(userId: string): void {
+  this.router.navigate(['/admin/user-update', userId]);
+}
   
 }

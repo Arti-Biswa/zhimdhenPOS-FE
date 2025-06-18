@@ -30,7 +30,16 @@ export class ApiService {
   getuser(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/users`);
   }
+
   getUserByRole(role:'ADMIN'|'CASHIER'):Observable<any>{
     return this.http.get(`${this.baseUrl}/users?role=${role}`);
+  }
+
+  getUserById(id:number):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/users/${id}`);  
+  }
+
+  updateUser(id: number, userDTO: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/users/${id}`, userDTO);
   }
 }
