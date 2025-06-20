@@ -1,0 +1,62 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <app-sidebar class="w-64 fixed left-0 top-0 h-full z-10"></app-sidebar>
+
+  <!-- Main content (navbar + form) -->
+  <div class="flex flex-col flex-1 ml-64">
+    <!-- Navbar -->
+    <app-navbar class="h-35 z-10"></app-navbar>
+
+<!-- CATEGORY + ADD PRODUCT BUTTON -->
+<div class="flex items-center gap-4 p-4">
+  <!-- Category Dropdown -->
+  <select
+    [(ngModel)]="selectedCategoryId"
+    (change)="filterProducts()"
+    class="px-4 py-2 rounded bg-green-100 text-green-700"
+  >
+    <option [value]="0">All Categories</option>
+    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+  </select>
+
+  <!-- Add Product Button -->
+  <button
+    class="bg-green-100 text-green-700 px-4 py-2 rounded"
+    (click)="onAddProduct()"
+  >
+    Add Product
+  </button>
+</div>
+
+<!-- PRODUCT GRID LIST BELOW -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 pb-7">
+  <div
+    *ngFor="let product of filteredProducts"
+    class="bg-white rounded-xl shadow p-4 flex flex-col items-center text-center"
+  >
+    <!-- Product Image -->
+    <img
+  *ngIf="product.image"
+  [src]="'http://localhost:8080' + product.image"
+  alt="{{ product.name }}"
+  class="w-full h-48 object-cover rounded mb-2"
+/>
+
+
+    <!-- Product Name and Price -->
+    <div class="mb-2">
+      <h3 class="text-lg font-semibold text-gray-800">{{ product.name }}</h3>
+      <p class="text-green-700 font-bold">{{ product.price | currency:'Nu':'symbol':'1.2-2' }}</p>
+    </div>
+
+    <!-- Update Button -->
+ <button
+  class="bg-green-200 text-green-900 px-4 py-1 rounded hover:bg-green-300"
+  [routerLink]="['/admin/update', product.id]"
+>
+  Update
+</button>
+
+  </div>
+</div>
+

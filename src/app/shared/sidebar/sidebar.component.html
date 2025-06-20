@@ -45,11 +45,21 @@
         class="ml-4 mt-2 space-y-1" 
         [class.hidden]="!isInventoryDropdownOpen"
       >
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+           <a routerLink="/product" routerLinkActive="bg-gray-300" class="block w-full h-full">
+            Add Product
+            </a>
+        
+        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
         <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
           Add Product</li>
         <li routerLink="/add-table" class="hover:bg-gray-200 p-2 rounded cursor-pointer">
         <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
           Add Table</li>
+
+          <a routerLink="/category" routerLinkActive="bg-gray-300" class="block w-full h-full">
+            Add Category
+            </a>
       </ul>
     </li>
     <li routerLink="/order" class="hover:bg-gray-200 p-2 rounded cursor-pointer flex items-center space-x-3">

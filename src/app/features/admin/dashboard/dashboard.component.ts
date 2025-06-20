@@ -5,7 +5,7 @@ import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NavbarComponent,SidebarComponent],
+  imports: [NavbarComponent, SidebarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
