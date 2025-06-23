@@ -29,4 +29,10 @@ getProducts(): Observable<any[]> {
 updateProduct(productId: number, formData: FormData): Observable<any> {
   return this.http.put(`${this.pdtUrl}/${productId}`, formData);
 }
+
+deleteProduct(productId: number): Observable<any> {
+  return this.http.delete(`${environment.productUrl}/${productId}`, { responseType: 'text' });
+}
+
+
 }
