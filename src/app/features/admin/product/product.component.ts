@@ -71,11 +71,28 @@ loadProducts() {
   }
 
   onUpdate(productId: number) {
-    alert(`Update product with ID: ${productId}`);
-   
+  this.router.navigate(['/admin/update', productId]);
   }
 
   onAddProduct() {
     this.router.navigate(['/product-form']);
   }
+onDelete(productId: number): void {
+  const confirmDelete = confirm('Are you sure you want to delete this product?');
+  if (confirmDelete) {
+    this.productService.deleteProduct(productId).subscribe({
+      next: () => {
+        // Remove the deleted product from both lists
+        this.products = this.products.filter(p => p.id !== productId);
+        this.filterProducts(); // Refresh filtered list
+        alert('Product deleted successfully.');
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Delete failed:', err);
+        alert(`Failed to delete product: ${err.message}`);
+      }
+    });
+  }
+}
+
 }
