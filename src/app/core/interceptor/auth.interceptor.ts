@@ -10,7 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   // Exclude refresh-token and login endpoints from adding access token
-  const excludedUrls = ['/auth/refresh-token', '/auth/login','auth/sign-up'];
+  const excludedUrls = ['/auth/refresh-token', '/auth/login','auth/register'];
   if (excludedUrls.some(url => req.url.includes(url))) {
     return next(req);
   }

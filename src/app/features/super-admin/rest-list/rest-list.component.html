@@ -1,0 +1,51 @@
+<div class="flex flex-col h-screen">
+  <app-top class="z-10"></app-top>
+  <app-admin-side class="z-10"></app-admin-side>
+  <main class="flex-1 p-6 lg:ml-64 overflow-y-auto bg-[#F2F2CB]">
+<div class="p-6">
+  <!-- Top bar -->
+  <div class="flex flex-col lg:flex-row justify-between items-stretch lg:items-center mb-4 gap-4 ">
+    <input
+      type="text"
+      placeholder="🔍 Search Restaurant"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="filterRestaurants()"
+      class="border rounded px-4 py-2 w-full lg:w-1/2"
+    />
+    <button (click)="createAdmin()" class="bg-blue-500 text-white px-4 py-2 rounded shadow cursor-pointer hover:bg-[#12BAB7] w-40 lg:w-auto">
+      Add Restaurants
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto ">
+    <table class="min-w-full text-left border border-gray-200">
+      <thead class="bg-gray-300 text-gray-600 shadow-md rounded">
+        <tr>
+          <th class="py-2 px-4">RestaurantName</th>
+          <th class="py-2 px-4">LicenseNo</th>
+         <th class="py-2 px-4">Address</th>
+          <th class="py-2 px-4">Owner</th>
+          <th class="py-2 px-4">Phone No.</th>
+          <th class="py-2 px-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr *ngFor="let restaurant of filteredRestaurants" class="hover:bg-gray-50 border-b border-gray-300 shadow-md">
+    <td class="py-2 px-4">{{ restaurant.restaurant_name }}</td>
+    <td class="py-2 px-4">{{ restaurant.license_no }}</td>
+    <td class="py-2 px-4">{{ restaurant.address }}</td>
+    <td class="py-2 px-4">{{ restaurant.username }}</td>
+    <td class="py-2 px-4">{{ restaurant.phoneNumber }}</td>
+    <td class="py-2 px-4">
+      <button (click)="onUpdate(restaurant.id)" class="cursor-pointer">
+        <i class="fas fa-pencil-alt text-orange-600 text-lg"></i>
+      </button>
+    </td>
+  </tr>
+</tbody>
+    </table>
+  </div>
+</div>
+</main>
+</div>

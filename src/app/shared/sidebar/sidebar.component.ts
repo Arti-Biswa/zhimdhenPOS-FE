@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { SidebarService } from '../../core/services/sidebar.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,8 +14,22 @@ export class SidebarComponent {
 
  isInventoryDropdownOpen = false;
  isReportDropdownOpen =false;
+  isOpen$!: Observable<boolean>;
 
- constructor (private router:Router){}
+ constructor (private router:Router, private sidebarService:SidebarService){
+   this.isOpen$ = this.sidebarService.open$;
+
+ }
+close() {
+    this.sidebarService.close();
+  }
+
+    onNavigate() {
+    // Close sidebar only for small screens
+    if (window.innerWidth < 1024) {
+      this.sidebarService.close();
+    }
+  }
   toggleInventoryDropdown(): void {
     this.isInventoryDropdownOpen = !this.isInventoryDropdownOpen;
   }

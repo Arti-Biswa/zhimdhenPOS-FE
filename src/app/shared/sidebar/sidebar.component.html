@@ -1,22 +1,22 @@
-<div class="fixed left-0 top-0 h-full w-65 bg-[#EDEDED] border-r p-6">
+<div
+  class="fixed top-0 left-0 h-full w-64 bg-[#EDEDED] border-r p-6
+         z-50 transition-transform duration-300 ease-in-out transform
+         -translate-x-full lg:translate-x-0" [class.translate-x-0]="isOpen$ | async">
+  
   <!-- Logo -->
-  <div class="mb-10 flex items-center space-x-4">
-    <img 
-      src="logo2.png" 
-      alt="Black Pebble Studios" 
-      class="h-20 w-43 rounded-full"
-    />
+   <div class="mb-10 hidden lg:flex items-center space-x-4">
+    <img src="logo2.png" alt="Black Pebble Studios" class="h-20 w-43 rounded-full" />
   </div>
 
   <!-- Sidebar Navigation -->
   <ul class="space-y-2 text-gray-700  font-bold text-base">
 
-    <li routerLink="/admin/dashboard" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+    <li routerLink="/admin/dashboard" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
       <i class="fa-solid fa-house text-xl "></i>
       <span>Dashboard</span>
     </li>
 
-    <li routerLink="/admin/user-list" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+    <li routerLink="/admin/user-list" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
       <i class="fas fa-users text-xl"></i>  
       <span>User Management</span>
     </li>
@@ -45,20 +45,20 @@
         class="ml-4 mt-2 space-y-1" 
         [class.hidden]="!isInventoryDropdownOpen"
       >
-        <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
-           <a routerLink="/product" routerLinkActive="bg-gray-300" class="block w-full h-full">
-            Add Product
-            </a>
-        
-          </li>
-        <li routerLink="/add-table" class="hover:bg-gray-200 p-2 rounded cursor-pointer">
+          <li (click)="onNavigate()" routerLink="/admin/product" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+          Add Product</li>
+
+        <li (click)="onNavigate()" routerLink="/admin/add-table" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
           Add Table</li>
 
-          <a routerLink="/category" routerLinkActive="bg-gray-300" class="block w-full h-full">
-            Add Category
-            </a>
+           <li (click)="onNavigate()" routerLink="/admin/category" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+          Add Category</li>
       </ul>
     </li>
+
+    <li routerLink="/admin/order" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+       <i class="fas fa-utensils text-xl"></i>
+      </li>
     <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
      <a routerLink="/menu" routerLinkActive="bg-gray-300" class="block w-full h-full">
       Menu
@@ -94,13 +94,13 @@
         class="ml-4 mt-2 space-y-1" 
         [class.hidden]="!isReportDropdownOpen"
       >
-        <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+        <li  (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
           Daily Sales Summary</li>
 
-        <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+        <li (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
           Sales Report</li>
 
-          <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+          <li (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer">
          Sales by Cashier</li>
       </ul>
     </li>
@@ -110,6 +110,11 @@
         <i class="fas fa-right-from-bracket text-xl"></i>
       <span>Log Out</span>
     </li>
-
   </ul>
 </div>
+
+<div class="fixed inset-0 bg-opacity-50 z-40 lg:hidden"
+     *ngIf="isOpen$ | async"
+     (click)="close()">
+</div>
+

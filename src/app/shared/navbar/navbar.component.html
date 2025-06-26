@@ -1,39 +1,43 @@
 <nav class="bg-[#12BAB7] shadow-md h-30">
-  <div class="container pl-40 py-3 flex justify-between items-center">
-    
-    <div class="ml-20 pl-10 mt-9">
-      <div class="text-white text-xl font-bold">
-        {{ userRole }} Dashboard
-      </div>
-    </div>
+  <div class="container mx-auto py-3 flex justify-between items-center">
 
-    <div class="flex items-center space-x-4">
-    <ng-container *ngIf="isAdmin">
-    <button 
-      *ngIf="currentUrl.includes('admin')" 
-      (click)="goToCashier()" 
-      class="text-gray-600 hover:text-gray-700 relative mt-9 mr-10 cursor-pointer"
-      title="Go to Cashier Dashboard">
-      <i class="fas fa-cash-register text-xl"></i>
-    </button>
+       <img
+      src="logo2.png"
+      alt="Black Pebble Studios"
+      class="h-19 w-auto rounded-full lg:hidden ml-3"
+    />
 
-    <button 
-      *ngIf="currentUrl.includes('staff/home')" 
-      (click)="goToAdminDashboard()" 
-      class="text-gray-600 hover:text-gray-700 relative mt-9 mr-10 cursor-pointer"
-      title="Back to Admin Dashboard">
-     <i class="fas fa-house text-xl"></i>
-    </button>
-  </ng-container>
-   <button class="text-gray-600 hover:text-gray-800 relative mt-9 mr-19">
-          <i class="fas fa-bell text-xl"></i>
-          <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+    <!-- Hamburger Icon (Mobile only) -->
+   <button class="text-white text-2xl lg:hidden mr-10"
+        (click)="onMenuClick()"
+        aria-label="Open menu">
+  <i class="fas fa-bars"></i>
+</button>
 
-     </button>
+    <!-- Right-aligned buttons & logo (Hidden on small screens) -->
+    <div class="hidden lg:flex items-center space-x-4 ml-auto">
+      <ng-container *ngIf="isAdmin">
+        <button 
+          *ngIf="currentUrl.includes('admin')" 
+          (click)="goToCashier()" 
+          class="text-gray-600 hover:text-gray-700 relative mt-2 cursor-pointer"
+          title="Go to Cashier Dashboard">
+          <i class="fas fa-cash-register text-xl"></i>
+        </button>
 
-      <div class="w-15 h-15 rounded-full bg-white p-1 shadow-md mt-5">
-        <img src="kitchen.png" alt="restaurant logo" class="w-full h-full object-cover rounded-full">
-      </div>
+        <button 
+          *ngIf="currentUrl.includes('staff/home')" 
+          (click)="goToAdminDashboard()" 
+          class="text-gray-600 hover:text-gray-700 relative mt-2 cursor-pointer"
+          title="Back to Admin Dashboard">
+          <i class="fas fa-house text-xl"></i>
+        </button>
+      </ng-container>
+
+      <button class="text-gray-600 hover:text-gray-800 relative mt-2">
+        <i class="fas fa-bell text-xl"></i>
+        <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+      </button>
     </div>
 
   </div>

@@ -1,0 +1,26 @@
+<div class="flex flex-col h-screen">
+  <app-top class="z-10"></app-top>
+  <app-admin-side class="z-10"></app-admin-side>
+  <main class="flex-1 lg:ml-64 p-6 overflow-y-auto bg-[#F2F2CB]">
+     <button (click)="onBack()" class="cursor-pointer">
+      <i class="fas fa-arrow-left text-lg ml-8"></i>        
+    </button>
+<form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()" class="space-y-4 p-4 max-w-xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Register Restaurant</h2>
+  <input formControlName="restaurant_name" type="text" placeholder="Restaurant Name" class="w-full p-2 border rounded" />
+  <input formControlName="license_no" type="text" placeholder="License Number" class="w-full p-2 border rounded" />
+  <input formControlName="address" type="text" placeholder="Address" class="w-full p-2 border rounded" />
+  <input formControlName="username" type="text" placeholder="Username" class="w-full p-2 border rounded" />
+  <input formControlName="email" type="email" placeholder="Email" class="w-full p-2 border rounded" />
+  <input formControlName="password" type="password" placeholder="Password" class="w-full p-2 border rounded" />
+  <input formControlName="phoneNumber" type="text" placeholder="Phone Number" class="w-full p-2 border rounded" />
+  <input type="text" placeholder="ADMIN" class="w-full p-2 border rounded bg-gray-100 cursor-not-allowed" readonly />
+
+  <input type="file" (change)="onImageSelected($event)" class="w-full p-2 border rounded" />
+
+  <button type="submit" class="w-full bg-[#12BAB7] text-white px-4 py-2 rounded hover:bg-[#0fa1a0] cursor-pointer">
+    Register
+  </button>
+</form>
+  </main>
+</div>
