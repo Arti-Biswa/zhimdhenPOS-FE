@@ -55,7 +55,7 @@
 
       <!-- Row 2: Price & Delete Icon -->
       <div class="text-green-700 font-bold text-sm">
-        {{ product.price | currency:'Nu':'symbol':'1.2-2' }}
+        {{ product.price | currency:'Nu':'symbol':'1.0' }}
       </div>
       <div class="flex justify-end">
         <button title="Delete" class="text-red-600 text-lg" (click)="onDelete(product.id)">

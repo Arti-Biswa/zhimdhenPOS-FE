@@ -11,6 +11,7 @@ import { OrderComponent } from './features/order/order.component';
 import { UserComponent } from './features/admin/user/user.component';
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 import { UserUpdateComponent } from './features/admin/user-update/user-update.component';
+import { MenuComponent } from './features/admin/menu/menu.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -29,6 +30,7 @@ export const routes: Routes = [
     {path:'admin/user',component:UserComponent},
     {path:'admin/user-list',component:UserListComponent},
     {path:'admin/user-list',component:UserListComponent},
-    {path:'admin/user-update/:id',component:UserUpdateComponent}
+    {path:'admin/user-update/:id',component:UserUpdateComponent},
+    {path:'menu',component:MenuComponent}
 
 ];

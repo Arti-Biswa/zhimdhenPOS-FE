@@ -3,18 +3,27 @@ import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { TableService } from '../../core/services/table.service';
+import { QRService } from '../../core/services/qr.service';
+import { OrderService } from '../../core/services/order.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-order',
-  imports: [SidebarComponent,NavbarComponent,CommonModule,RouterModule],
+  standalone: true,
+  imports: [SidebarComponent, NavbarComponent, CommonModule, RouterModule],
   templateUrl: './order.component.html',
-  styleUrl: './order.component.css'
+  styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-   tableList: { tableNumber: string }[] = [];
+  tableList: { tableNumber: string }[] = [];
+  qrImages: { [key: string]: string } = {};
+  newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
 
-  constructor(private tableService: TableService) {}
+  constructor(
+    private tableService: TableService,
+    private qrService: QRService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
     this.loadTables();
@@ -23,11 +32,50 @@ export class OrderComponent implements OnInit {
   loadTables(): void {
     this.tableService.getAllTables().subscribe({
       next: (tables) => {
-        console.log('Tables fetched:', tables); // ✅ should appear in console
         this.tableList = tables;
+
+        this.tableList.forEach(table => {
+          this.qrService.getQRCode(table.tableNumber).subscribe({
+            next: (blob) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                this.qrImages[table.tableNumber] = reader.result as string;
+              };
+              reader.readAsDataURL(blob);
+            },
+            error: (error) => {
+              console.error(`Failed to load QR for table ${table.tableNumber}`, error);
+            }
+          });
+        });
+
+        this.loadNewOrdersCount();
       },
       error: (err) => {
         console.error('Error fetching tables:', err);
+      }
+    });
+  }
+
+  loadNewOrdersCount(): void {
+    this.orderService.getNewOrdersCount().subscribe({
+      next: (countMap) => {
+        // Here we assume backend keys are tableNumbers (strings)
+        this.newOrdersCountMap = countMap;
+      },
+      error: (err) => {
+        console.error('Error fetching new orders count:', err);
+      }
+    });
+  }
+
+  markAsViewed(tableNumber: string): void {
+    this.orderService.markOrdersAsViewed(tableNumber).subscribe({
+      next: () => {
+        this.newOrdersCountMap[tableNumber] = 0;
+      },
+      error: (err) => {
+        console.error(`Error marking orders as viewed for table ${tableNumber}:`, err);
       }
     });
   }
