@@ -17,8 +17,8 @@ export class TableService {
 
   constructor(private http: HttpClient) {}
 
-  addTable(tableNumber: string) {
-    this.tables.push(tableNumber);
+  addTable(table: TableDto): Observable<TableDto> {
+    return this.http.post<TableDto>(`${this.baseUrl}/add`, table);
   }
 
   getTables(): string[] {

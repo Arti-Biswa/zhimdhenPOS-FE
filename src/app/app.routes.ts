@@ -10,6 +10,7 @@ import { UpdateFormComponent } from './features/admin/update-form/update-form.co
 import { UserComponent } from './features/admin/user/user.component';
 import { UserListComponent } from './features/admin/user-list/user-list.component';
 import { UserUpdateComponent } from './features/admin/user-update/user-update.component';
+import { MenuComponent } from './features/admin/menu/menu.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { AddTableComponent } from './features/admin/add-table/add-table.component';
 import { IndexComponent } from './features/super-admin/index/index.component';
@@ -28,14 +29,14 @@ export const routes: Routes = [
     { path: 'user', component: UserComponent },
     { path: 'user-list', component: UserListComponent },
     { path: 'user-update/:id', component: UserUpdateComponent },
-    {path:'admin/dashboard',component:DashboardComponent},
-    {path:'staff/home',component:HomeComponent},
+    {path:'dashboard',component:DashboardComponent},
     {path:'product',component:ProductComponent},
     { path: 'product-form', component: ProductFormComponent },
     { path: 'category', component: CategoryComponent }, 
-    { path: 'admin/update/:id', component: UpdateFormComponent },
+    { path: 'update/:id', component: UpdateFormComponent },
     {path: 'add-table', component: AddTableComponent},
     {path: 'order', component: OrderComponent},
+    {path:'menu',component:MenuComponent}
 
   ]
 },
