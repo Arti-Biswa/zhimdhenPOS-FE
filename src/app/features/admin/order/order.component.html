@@ -1,8 +1,7 @@
 <div class="flex flex-col min-h-screen bg-[#fefccf]">
   <app-navbar class="z-10"></app-navbar>
   <app-sidebar class="z-10"></app-sidebar>
-
-  <main class="flex-1 p-6 ml-64 overflow-hidden max-w-[calc(100vw-16rem-3rem)]">
+  <main class="flex-1 p-6 lg:ml-64 overflow-hidden ">
     <div class="overflow-x-auto px-4">
       <table
         class="w-full text-sm text-gray-700"
@@ -10,8 +9,8 @@
       >
         <thead class="bg-[#f3f4f6] text-gray-800 font-semibold rounded-lg">
           <tr>
-            <th class="px-4 py-3 break-words text-center">Table Number</th>
-            <th class="px-4 py-3 break-words text-center">New Order</th>
+            <th class="px-4 py-3 break-words text-center text-lg">Table Number</th>
+            <th class="px-4 py-3 break-words text-center text-lg">New Order</th>
           </tr>
         </thead>
         <tbody>
@@ -19,9 +18,8 @@
   *ngFor="let table of tableList"
   class="bg-transparent rounded-lg border border-gray-300 shadow-sm transition duration-200 ease-in-out hover:bg-white hover:bg-opacity-1 hover:shadow-md hover:scale-[1.03] overflow-hidden"
 >
-    <td class="px-4 py-3 break-words text-center">{{ table.tableNumber }}</td>
+    <td class="px-4 py-3 break-words text-center text-lg text-black">{{ table.tableNumber }}</td>
     <td class="px-4 py-3">
-      <!-- Future New Order actions -->
     </td>
   </tr>
 </tbody>

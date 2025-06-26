@@ -18,13 +18,13 @@ export class UserListComponent {
  users: any[] = [];
   filteredUsers: any[] = [];
   searchQuery = '';
-  selectedRole: 'ADMIN' | 'CASHIER' = 'ADMIN'; // default
+  selectedRole: 'CASHIER' ='CASHIER'; // default
 
   constructor(private apiService: ApiService, private router: Router) {
     this.loadUsersByRole(this.selectedRole);
   }
 
-  loadUsersByRole(role: 'ADMIN' | 'CASHIER') {
+  loadUsersByRole(role: 'CASHIER') {
     this.selectedRole = role;
     this.apiService.getUserByRole(role).subscribe({
       next: (res) => {
@@ -38,7 +38,7 @@ export class UserListComponent {
     });
   }
 
-  selectRole(role: 'ADMIN' | 'CASHIER') {
+  selectRole(role: 'CASHIER') {
     this.loadUsersByRole(role);
   }
 

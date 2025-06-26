@@ -1,0 +1,27 @@
+<nav class="bg-[#12BAB7] shadow-md h-30">
+  <div class="container mx-auto py-3 flex justify-between items-center">
+
+        <img
+      src="logo2.png"
+      alt="Black Pebble Studios"
+      class="h-19 w-auto rounded-full lg:hidden ml-3"
+    />
+
+    <!-- Hamburger Icon (Mobile only) -->
+   <button class="text-white text-2xl lg:hidden mr-10"
+        (click)="onMenuClick()"
+        aria-label="Open menu">
+  <i class="fas fa-bars"></i>
+</button>
+
+  <div class="hidden lg:flex items-center space-x-4 ml-auto">
+      <div class="w-12 h-12 rounded-full bg-white p-1 shadow-md mt-6">
+        <img src="superad.png" alt="restaurant logo" class="w-full h-full object-cover rounded-full">
+      </div>
+
+      <button>
+        <i class="fas fa-caret-down mt-7 cursor-pointer"></i>
+      </button>
+    </div>
+</div>
+</nav>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
-import { TableService } from '../../core/services/table.service';
+import { TableService } from '../../../core/services/table.service';
 import { RouterModule } from '@angular/router';
 
 @Component({

@@ -5,10 +5,11 @@ import { AuthService } from '../../core/services/auth.services';
 import { LoginModel } from '../../core/model/login.model';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SidebarService } from '../../core/services/sidebar.service';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterModule,CommonModule,ToastrModule,ReactiveFormsModule],
+  imports: [RouterModule,CommonModule,ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,7 +22,8 @@ submitted = false;
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private sidebarService:SidebarService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [
@@ -61,13 +63,16 @@ onSubmit(): void {
           next: (user) => {
             const role = user.role.toLowerCase();
 
-            if (role === 'admin') {
-              this.router.navigate(['admin/dashboard']);
+            if (role === 'super_admin') {
+              this.router.navigate(['super-admin/index']);
 
-            } else if (role === 'cashier') {
-              this.router.navigate(['staff/home']);
+            } else if (role === 'admin') {
+              this.router.navigate(['admin/dashboard']);
               
-            } else {
+            }else if(role === 'cashier'){
+              this.router.navigate(['staff/home'])
+            } 
+            else {
               this.toastr.warning('Unknown role');
               this.router.navigate(['/']);
             }
@@ -77,7 +82,7 @@ onSubmit(): void {
             this.authService.logout();
           }
         });
-
+        this.sidebarService.close();
         this.toastr.success('Login successful', 'Success');
       } else {
         this.toastr.error('No token received', 'Error');

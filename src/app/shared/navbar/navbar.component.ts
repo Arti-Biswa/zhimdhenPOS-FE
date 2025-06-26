@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../core/services/auth.services';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../core/services/user.service';
+import { SidebarService } from '../../core/services/sidebar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,12 +19,14 @@ currentUser$: Observable<User | null>;
 userRole:string='';
 isAdmin:boolean=false;
 currentUrl:string='';
+isSidebarOpen:boolean=false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private sidebarService:SidebarService
 
   ) {
     this.currentUser$ = this.authService.getCurrentUser();
@@ -55,11 +58,6 @@ ngOnInit(): void {
     this.router.navigate(['/admin/dashboard']);
   }
 
-  toggleSidebar(): void {
-    // Implement sidebar toggle logic
-    console.log('Toggle Sidebar');
-  }
-
   handleLogout(): void {
     this.authService.logout();
     this.toastr.success('Logout successful', 'Success');
@@ -77,4 +75,8 @@ ngOnInit(): void {
   onCashier(){
     this.router.navigate(['staff/home']);
   }
+
+  onMenuClick():void {
+  this.sidebarService.toggle();
+}
 }

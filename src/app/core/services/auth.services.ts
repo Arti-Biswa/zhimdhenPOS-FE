@@ -84,7 +84,7 @@ export class AuthService {
           username: response?.data?.user.email,
           role: response?.data?.user.role,
           password: '',
-          phoneNumber: 0
+          phoneNumber: ''
         };
         
         this.userService.setCurrentUser(user);

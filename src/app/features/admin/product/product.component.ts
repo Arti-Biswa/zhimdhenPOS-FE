@@ -75,7 +75,7 @@ loadProducts() {
   }
 
   onAddProduct() {
-    this.router.navigate(['/product-form']);
+    this.router.navigate(['/admin/product-form']);
   }
 onDelete(productId: number): void {
   const confirmDelete = confirm('Are you sure you want to delete this product?');

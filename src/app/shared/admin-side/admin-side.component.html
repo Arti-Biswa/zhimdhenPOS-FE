@@ -8,19 +8,16 @@
     <img src="logo2.png" alt="Black Pebble Studios" class="h-20 w-43 rounded-full" />
   </div>
 
-
   <!-- Sidebar Navigation -->
   <ul class="space-y-2 text-gray-700  font-bold text-base">
-
-    <li routerLink="/staff/home" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+    <li routerLink="/super-admin/index" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
       <i class="fa-solid fa-house text-xl "></i>
       <span>Dashboard</span>
     </li>
 
-    <!-- order list -->
-    <li (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
-      <i class="fas fa-utensils text-xl"></i>
-      <span>Orders</span>
+  <li routerLink="/super-admin/rest-list" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+      <i class="fas fa-users text-xl"></i>  
+      <span>User Management</span>
     </li>
 
     <!-- log out -->
