@@ -1,13 +1,8 @@
 <div class="flex h-screen">
-  <!-- Sidebar -->
   <app-sidebar class="w-64 fixed left-0 top-0 h-full z-10"></app-sidebar>
-
-  <!-- Main content (navbar + form) -->
-  <div class="flex flex-col flex-1 ml-64" style="background-color: #F2F2CB; min-height: 100vh;">
-    <!-- Navbar -->
+  <div class="flex flex-col flex-1 lg:ml-64" style="background-color: #F2F2CB; min-height: 100vh;">
     <app-navbar class="h-35 z-10"></app-navbar>
 
- 
 <div class="max-w-xl mx-auto bg-white shadow rounded p-6 mt-6" >
   <form (ngSubmit)="onSubmit()" #productForm="ngForm" enctype="multipart/form-data" class="space-y-6">
     <div class="flex space-x-4">

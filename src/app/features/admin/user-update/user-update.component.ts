@@ -24,7 +24,8 @@ export class UserUpdateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private toastr:ToastrService
   ) {}
 
 ngOnInit(): void {
@@ -33,7 +34,7 @@ ngOnInit(): void {
   this.api.get(`/users/${this.userId}`).subscribe((res: any) => {
     const user = res?.data?.user;
 
-    console.log('User loaded:', user);
+    console.log('User data:', user);
 
     this.user = {
       username: user?.username || '',
@@ -42,11 +43,11 @@ ngOnInit(): void {
       role: user?.role || '',
     };
   });
-}
-
+} 
 
   onSubmit(): void {
     this.api.updateUser(this.userId, this.user).subscribe(() => {
+      this.toastr.success('User Updated Successfully','Success');
       this.router.navigate(['admin/user-list']);
     });
   }

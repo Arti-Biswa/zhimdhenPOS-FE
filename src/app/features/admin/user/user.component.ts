@@ -6,6 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.services';
 import { Role } from '../../../core/model/role.enum';
 import { Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user',
@@ -18,11 +19,11 @@ user={
   username:'',
   email:'',
   password:'',
-  phoneNumber:0,
+  phoneNumber:'',
   role:Role.ADMIN
 }
 Role=Role;
-constructor (private authService:AuthService, private router:Router){}
+constructor (private authService:AuthService, private router:Router, private toastr:ToastrService){}
 
  saveUser(form: NgForm): void {
   console.log('Submit triggered!', form);
@@ -32,7 +33,7 @@ constructor (private authService:AuthService, private router:Router){}
     this.authService.signup(this.user).subscribe({
       next: (res) => {
         console.log('User registered successfully:', res);
-        alert('User created successfully!');
+        this.toastr.success('User created successfully!','Success');
         this.router.navigate(['admin/user-list']);
         form.resetForm();
       },
