@@ -46,9 +46,7 @@ export class MenuComponent implements OnInit {
 
   loadCategories(): void {
     this.productService.getCategories().subscribe({
-      next: (categories) => {
-        this.categories = categories;
-      },
+      next: (categories) => this.categories = categories,
       error: (error) => {
         console.error('Failed to load categories:', error);
         alert('Failed to load categories');
@@ -72,11 +70,9 @@ export class MenuComponent implements OnInit {
   filterProducts(): void {
     const categoryIdNum = Number(this.selectedCategoryId);
 
-    if (categoryIdNum === 0) {
-      this.filteredProducts = this.products;
-    } else {
-      this.filteredProducts = this.products.filter(p => p.categoryId === categoryIdNum);
-    }
+    this.filteredProducts = categoryIdNum === 0
+      ? this.products
+      : this.products.filter(p => p.categoryId === categoryIdNum);
   }
 
   onSelectCategory(categoryId: any): void {
@@ -117,8 +113,16 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  clearCart(): void {
+    this.cartItems = this.cartItems.filter(item => item.tableId !== this.selectedTableId);
+  }
+
   get tableCartItems(): any[] {
     return this.cartItems.filter(item => item.tableId === this.selectedTableId);
+  }
+
+  getGrandTotal(): number {
+    return this.tableCartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   }
 
   placeOrder(): void {
@@ -138,7 +142,7 @@ export class MenuComponent implements OnInit {
     this.orderService.placeOrder(payload).subscribe({
       next: () => {
         alert('Order placed successfully!');
-        this.cartItems = this.cartItems.filter(item => item.tableId !== this.selectedTableId);
+        this.clearCart();
       },
       error: err => {
         console.error('Failed to place order:', err);

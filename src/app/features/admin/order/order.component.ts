@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD:src/app/features/order/order.component.ts
-import { TableService } from '../../core/services/table.service';
-import { QRService } from '../../core/services/qr.service';
-import { OrderService } from '../../core/services/order.service';
-=======
-import { TableService } from '../../../core/services/table.service';
->>>>>>> 17cca5cd2f3c02b759b2807c6d6d422de3cc8834:src/app/features/admin/order/order.component.ts
 import { RouterModule } from '@angular/router';
+import { TableService } from '../../../core/services/table.service';
+import { QRService } from '../../../core/services/qr.service';
+import { OrderService } from '../../../core/services/order.service';
 
 @Component({
   selector: 'app-order',

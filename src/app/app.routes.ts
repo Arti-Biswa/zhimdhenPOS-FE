@@ -36,11 +36,12 @@ export const routes: Routes = [
     { path: 'update/:id', component: UpdateFormComponent },
     {path: 'add-table', component: AddTableComponent},
     {path: 'order', component: OrderComponent},
-    {path:'menu',component:MenuComponent}
 
   ]
 },
     {path:'staff/home',component:HomeComponent,canActivate:[AuthGuard]},
+    { path: 'menu', component: MenuComponent },
+
 
      {
   path: 'super-admin',

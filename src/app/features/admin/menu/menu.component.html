@@ -1,89 +1,104 @@
+<!-- Outer wrapper with max width and center -->
+<div class="max-w-7xl mx-auto p-6">
 
-    <!-- Content Wrapper -->
-    <div class="p-6">
+  <!-- Category Filter Dropdown -->
+  <div class="mb-6">
+    <label for="category" class="block mb-2 text-sm font-medium text-gray-700">Filter by Category</label>
+    <select
+      [(ngModel)]="selectedCategoryId"
+      (change)="onSelectCategory(selectedCategoryId)"
+      id="category"
+      class="px-4 py-2 rounded border border-gray-300 focus:ring focus:ring-green-300 focus:outline-none"
+    >
+      <option [value]="0">All Categories</option>
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+    </select>
+  </div>
 
-      <!-- Category Filter Dropdown -->
-      <div class="mb-6">
-        <label for="category" class="block mb-2 text-sm font-medium text-gray-700"></label>
-        <select
-          [(ngModel)]="selectedCategoryId"
-          (change)="onSelectCategory(selectedCategoryId)"
-          id="category"
-          class="px-4 py-2 rounded border border-gray-300 focus:ring focus:ring-green-300 focus:outline-none"
-        >
-          <option [value]="0">All Categories</option>
-          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-        </select>
-      </div>
+  <!-- Products Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    <div *ngFor="let product of filteredProducts" class="bg-white p-5 shadow rounded">
+      <img *ngIf="product.image"
+        [src]="'http://192.168.1.108:8080' + product.image"
+        alt="{{ product.name }}"
+        class="h-40 w-full object-cover rounded mb-3" />
 
-      <!-- Products Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div *ngFor="let product of filteredProducts" class="bg-white p-5 shadow rounded">
-
-        <img *ngIf="product.image"
-          [src]="'http://192.168.1.108:8080' + product.image"
-           alt="{{ product.name }}"
-           class="h-40 w-full object-cover rounded mb-3" />
-
-
-          <!-- Product Info and Add to Cart -->
-          <div class="flex justify-between items-center">
-            <div>
-              <h3 class="font-semibold text-md text-gray-800">{{ product.name }}</h3>
-              <p class="text-green-700 font-bold text-sm">{{ product.price | currency:'Nu' }}</p>
-            </div>
-            <button class="bg-teal-500 text-white px-4 py-1 rounded hover:bg-teal-600"
-              (click)="addToCart(product)">
-              Add to Cart
-            </button>
-          </div>
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-semibold text-md text-gray-800">{{ product.name }}</h3>
+          <p class="text-green-700 font-bold text-sm">{{ product.price | currency:'Nu' }}</p>
         </div>
-      </div>
-
-      <!-- Cart Summary -->
-      <div *ngIf="cartItems.length > 0" class="mt-10 bg-white p-4 rounded shadow">
-        <h2 class="text-lg font-semibold mb-4">🛒 Cart Summary</h2>
-        <table class="w-full table-auto">
-          <thead>
-            <tr class="bg-gray-200 text-left">
-              <th class="p-2">Product</th>
-              <th class="p-2">Price</th>
-              <th class="p-2">Quantity</th>
-              <th class="p-2">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of tableCartItems">
-              <td class="p-2">{{ item.name }}</td>
-              <td class="p-2">{{ item.price | currency:'Nu' }}</td>
-              <td class="p-2 flex items-center gap-2">
-  <button
-    class="px-2 py-1 bg-gray-200 rounded"
-    (click)="decreaseQuantity(item)"
-  >−</button>
-
-  <span>{{ item.quantity }}</span>
-
-  <button
-    class="px-2 py-1 bg-gray-200 rounded"
-    (click)="increaseQuantity(item)"
-  >+</button>
-</td>
-
-              <td class="p-2">{{ item.price * item.quantity | currency:'Nu' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Place Order Button -->
-      <div class="mt-4 text-right" *ngIf="cartItems.length > 0">
         <button
-          class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
-          (click)="placeOrder()"
+          class="bg-teal-500 text-white px-4 py-1 rounded hover:bg-teal-600"
+          (click)="addToCart(product)"
         >
-          🧾 Place Order
+          Add to Cart
         </button>
       </div>
-
     </div>
+  </div>
+<div class="background-container p-6 rounded-lg shadow-lg max-w-3xl mx-auto bg-white overflow-hidden">
+
+  <div *ngIf="cartItems.length > 0">
+
+    <h2 class="text-lg font-semibold mb-4">🛒 Cart Summary</h2>
+
+    <table class="w-full table-fixed text-center border-collapse">
+     <thead>
+    <tr class="bg-gray-200">
+      <th class="p-2 w-[25%]">Product</th>
+      <th class="p-2 w-[15%]">Price</th>
+      <th class="p-2 w-[22%]">Quantity</th>
+      <th class="p-2 w-[18%]">Image</th>
+      <th class="p-2 w-[20%]">Total</th>
+      </tr>
+     </thead>
+     <tbody>
+        <tr *ngFor="let item of tableCartItems">
+          <td class="p-2">
+            <span class="block text-sm font-medium">{{ item.name }}</span>
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <span class="block text-sm">{{ item.price | currency:'Nu' }}</span>
+          </td>
+          <td class="p-2">
+            <div class="flex justify-center items-center gap-1">
+              <button class="px-1 py-1 bg-gray-200 rounded text-sm" (click)="decreaseQuantity(item)">−</button>
+              <span class="text-sm">{{ item.quantity }}</span>
+              <button class="px-1 py-1 bg-gray-200 rounded text-sm" (click)="increaseQuantity(item)">+</button>
+            </div>
+          </td>
+          <td class="p-2">
+            <img *ngIf="item.image"
+              [src]="'http://192.168.1.108:8080' + item.image"
+              alt="{{ item.name }}"
+              class="w-10 h-10 object-cover rounded mx-auto" />
+          </td>
+          <td class="p-2 whitespace-nowrap">
+            <span class="block text-sm">{{ item.price * item.quantity | currency:'Nu' }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-6 text-center font-semibold text-xl text-gray-700">
+      Grand Total Amount: Nu. {{ getGrandTotal() }}
+    </div>
+
+    <div class="mt-6 flex justify-center gap-4">
+      <button
+        class="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 min-w-[120px]"
+        (click)="clearCart()"
+      >
+        ❌ Clear The Cart
+      </button>
+      <button
+        class="bg-yellow-400 text-black px-4 py-2 rounded shadow hover:bg-yellow-500 min-w-[120px]"
+        (click)="placeOrder()"
+      >
+        🧾 Place Order
+      </button>
+    </div>
+  </div>
+</div>
+  </div>
