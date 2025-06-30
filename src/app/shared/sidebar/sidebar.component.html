@@ -8,6 +8,16 @@
     <img src="logo2.png" alt="Black Pebble Studios" class="h-20 w-43 rounded-full" />
   </div>
 
+<!-- Logo (mobile only) -->
+<div class="mb-10 flex lg:hidden items-center justify-center">
+  <img
+    *ngIf="logoUrl$ | async as img"
+    [src]="img"
+    alt="Restaurant Logo"
+    class="h-20 w-20 rounded-full object-cover shadow"
+  />
+</div>
+
   <!-- Sidebar Navigation -->
   <ul class="space-y-2 text-gray-700  font-bold text-base">
 
@@ -57,6 +67,7 @@
     </li>
 
     <li routerLink="/admin/order" (click)="onNavigate()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+<<<<<<< HEAD
     <i class="fas fa-utensils text-xl"></i>
     <span>Order</span>
    </li>
@@ -66,6 +77,15 @@
     <li class="hover:bg-gray-200 p-2 rounded cursor-pointer">
      <a routerLink="/admin/menu" routerLinkActive="bg-gray-300" class="block w-full h-full">
       Menu
+=======
+       <i class="fas fa-utensils text-xl"></i>
+          <span>Orders</span>
+      </li>
+    <li class="hover:bg-gray-400 p-2 rounded cursor-pointer">
+     <a routerLink="/menu" routerLinkActive="bg-gray-300" class="block w-full h-full space-x-3">
+      <i class="fas fa-book-open text-xl"></i>
+     <span>Menu</span>
+>>>>>>> 78076e0 (POS-13:Implemented forgot password and profile)
     </a>
     </li>
     
@@ -104,8 +124,7 @@
       </ul>
     </li>
 
-    <!-- log out -->
-      <li (click)="onLogout()" class="hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
+    <li (click)="onLogout()" class=" lg:hidden hover:bg-gray-400 p-2 rounded cursor-pointer flex items-center space-x-3">
         <i class="fas fa-right-from-bracket text-xl"></i>
       <span>Log Out</span>
     </li>
@@ -116,4 +135,3 @@
      *ngIf="isOpen$ | async"
      (click)="close()">
 </div>
-

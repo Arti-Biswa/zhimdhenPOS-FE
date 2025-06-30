@@ -58,8 +58,6 @@ loadProducts() {
   });
 }
 
-
-
   filterProducts() {
     const categoryIdNum = +this.selectedCategoryId;
 

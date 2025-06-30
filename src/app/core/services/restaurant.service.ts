@@ -1,14 +1,18 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../environment";
 import { HttpClient, HttpEvent } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService{
+  assetFullPath(image: any): string | null {
+    throw new Error('Method not implemented.');
+  }
     private baseUrl = environment.restUrl;
-    
+      private assetBase = environment.fileBaseUrl;  // base URL for images
+
      constructor(private http: HttpClient) {}
 
   post<T>(endpoint: string, body: any, options: any = { observe: 'events', reportProgress: true }): Observable<HttpEvent<T>> {
@@ -29,4 +33,11 @@ patch(id: number, restaurantDTO: any, imageFile?: File): Observable<any> {
 
   return this.http.patch(`${this.baseUrl}/${id}`, formData);
 }
+
+getLogoUrl() {
+  return this.http.get<{ status: boolean; data: { restaurant: { image: string } } }>(`${this.baseUrl}/self`)
+    .pipe(
+      map(res => this.assetBase + '/' + res.data.restaurant.image)
+    );
+  }
 }

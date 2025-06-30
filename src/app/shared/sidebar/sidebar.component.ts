@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { SidebarService } from '../../core/services/sidebar.service';
 import { Observable } from 'rxjs';
+import { RestaurantService } from '../../core/services/restaurant.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,9 +16,14 @@ export class SidebarComponent {
  isInventoryDropdownOpen = false;
  isReportDropdownOpen =false;
   isOpen$!: Observable<boolean>;
+isAdmin:boolean=false;
+logoUrl$!: Observable<string>;   
 
- constructor (private router:Router, private sidebarService:SidebarService){
+
+ constructor (private router:Router, private sidebarService:SidebarService, private restaurantService:RestaurantService){
    this.isOpen$ = this.sidebarService.open$;
+   this.logoUrl$ = this.restaurantService.getLogoUrl();
+
 
  }
 close() {

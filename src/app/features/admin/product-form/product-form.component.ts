@@ -5,6 +5,8 @@ import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class ProductFormComponent implements OnInit {
   categories: { id: number; name: string }[] = [];
   products: any[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private toastr:ToastrService,private router:Router) {}
 
   ngOnInit() {
     this.productService.getCategories().subscribe({
@@ -46,12 +48,16 @@ export class ProductFormComponent implements OnInit {
     formData.append('product', JSON.stringify(this.product));
     formData.append('imageFile', this.selectedFile);
 
-    this.productService.addProduct(formData).subscribe({
-      next: () => alert('Product added successfully'),
-      error: (err: HttpErrorResponse) => {
-        console.error(err);
-        alert('Failed to add product');
-      }
-    });
+ this.productService.addProduct(formData).subscribe({
+  next: () => {
+    this.toastr.success('Product added successfully', 'Success');
+    this.router.navigate(['/admin/product'])
+  },
+  error: (err: HttpErrorResponse) => {
+    console.error(err);
+    alert('Failed to add product');
+  }
+});
+
   }
 }

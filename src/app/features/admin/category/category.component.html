@@ -1,8 +1,8 @@
 <div class="flex flex-col h-screen">
   <app-navbar class="z-10"></app-navbar>
   <app-sidebar class="z-10"></app-sidebar>
-  <main class="flex-1 lg:ml-64 p-6 overflow-y-auto">
-    <div class="flex justify-center items-start flex-grow" style="background-color: #F2F2CB;">
+  <main class="flex-1 lg:ml-64 p-6 overflow-y-auto bg-[#F2F2CB]">
+    <div class="flex justify-center items-start flex-grow">
       <div class="bg-white shadow-md p-6 rounded-lg w-96 mt-35">
         <form (ngSubmit)="onAddCategory()" #categoryForm="ngForm">
           <label for="categoryName" class="block mb-2 text-gray-700 font-semibold">Category Name</label>

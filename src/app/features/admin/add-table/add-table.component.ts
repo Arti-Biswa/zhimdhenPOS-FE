@@ -24,9 +24,6 @@ export class AddTableComponent {
     private qrService: QRService
   ) {}
 
-  addTable() {
-  const trimmedTableNumber = this.tableNumber.trim();
-
 
   addTable() {
   const trimmedTableNumber = this.tableNumber.trim();

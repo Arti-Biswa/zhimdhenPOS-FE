@@ -15,13 +15,24 @@
 </button>
 
   <div class="hidden lg:flex items-center space-x-4 ml-auto">
-      <div class="w-12 h-12 rounded-full bg-white p-1 shadow-md mt-6">
-        <img src="superad.png" alt="restaurant logo" class="w-full h-full object-cover rounded-full">
-      </div>
+     <div class="relative w-12 h-12 rounded-full bg-white p-1 shadow-md mt-6 mr-15">
+        <!-- avatar -->
+        <img
+          src="superad.png"
+          alt="Super‑admin"
+          class="w-full h-full object-cover rounded-full cursor-pointer"
+          (click)="toggleDropdown($event)"
+        />
 
-      <button>
-        <i class="fas fa-caret-down mt-7 cursor-pointer"></i>
-      </button>
+        <!-- dropdown -->
+        <div
+          *ngIf="showDropdown"
+          class="absolute right-0 mt-2 w-50 bg-white border rounded shadow-lg z-50"
+          (click)="$event.stopPropagation()"  
+        >
+          <app-profile-dropdown></app-profile-dropdown>
+        </div>
+      </div>
     </div>
 </div>
 </nav>

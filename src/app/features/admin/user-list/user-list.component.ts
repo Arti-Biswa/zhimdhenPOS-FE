@@ -23,20 +23,21 @@ export class UserListComponent {
   constructor(private apiService: ApiService, private router: Router) {
     this.loadUsersByRole(this.selectedRole);
   }
-
-  loadUsersByRole(role: 'CASHIER') {
-    this.selectedRole = role;
-    this.apiService.getUserByRole(role).subscribe({
-      next: (res) => {
-        this.users = res.data.users || [];
-        this.filterUsers();
-      },
-      error: (err) => {
-        console.error('Error fetching users:', err);
-        this.users = [];
-      }
-    });
-  }
+loadUsersByRole(role: 'CASHIER') {
+  this.selectedRole = role;
+  this.apiService.getUsersByRestaurant().subscribe({
+    next: (res: any[]) => {
+      // Filter only cashiers
+      this.users = res.filter(user => user.role === role);
+      this.filterUsers();
+    },
+    error: (err) => {
+      console.error('Error fetching users:', err);
+      this.users = [];
+      this.filteredUsers = [];
+    }
+  });
+}
 
   selectRole(role: 'CASHIER') {
     this.loadUsersByRole(role);

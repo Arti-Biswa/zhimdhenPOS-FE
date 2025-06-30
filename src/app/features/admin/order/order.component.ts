@@ -4,9 +4,6 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Table, TableService } from '../../../core/services/table.service';
-import { RouterModule } from '@angular/router';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
 import { OrderService } from '../../../core/services/order.service';
 
@@ -19,7 +16,6 @@ import { OrderService } from '../../../core/services/order.service';
 })
 export class OrderComponent implements OnInit {
   tableList: Table[] = [];
- tableList: { tableNumber: string }[] = [];
   qrImages: { [key: string]: string } = {};
   newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
 
@@ -49,7 +45,7 @@ export class OrderComponent implements OnInit {
               reader.readAsDataURL(blob);
             },
             error: (error) => {
-              console.error(`Failed to load QR for table ${table.tableNumber}`, error);
+              console.error('Failed to load QR for table ${table.tableNumber}', error);
             }
           });
         });
@@ -86,8 +82,9 @@ export class OrderComponent implements OnInit {
   }
 
 onDeleteTable(id: number): void {
-  console.log(`Attempting to delete table ID: ${id}`); // Debug line
-  if (confirm(`Are you sure you want to delete table ID ${id}?`)) {
+  console.log(`Attempting to delete table ID: ${id}`);
+
+  if (confirm(`Are you sure you want to delete table ID ${id}?)`)){
     this.tableService.deleteTableById(id).subscribe({
       next: () => {
         alert(`Table ID ${id} deleted successfully!`);
@@ -95,6 +92,9 @@ onDeleteTable(id: number): void {
       },
       error: (err) => {
         console.error('Delete failed:', err);
+        alert('Failed to delete table!');
+      }
+    });
   }
 }
-
+  }

@@ -1,0 +1,81 @@
+<div class="min-h-screen flex items-start justify-center bg-gray-50 pt-8">
+  <form
+  [formGroup]="profileForm"
+    class="bg-white rounded shadow p-8 w-full max-w-5xl"
+  >
+    <h2 class="text-2xl font-semibold mb-6">My Profile</h2>
+
+    <!-- grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- ───────── LEFT COLUMN (avatar) ───────── -->
+      <div class="md:col-span-1 space-y-4">
+        <div
+          class="w-32 h-32 rounded overflow-hidden border flex items-center justify-center">
+      <img [src]="profileForm.get('image')!.value"
+     alt="Restaurant Logo"
+     class="object-cover w-full h-full" />
+
+          <ng-template #placeholder>
+            <span class="text-xs text-gray-400">No Image</span>
+          </ng-template>
+        </div>
+
+        <div class="flex space-x-2">
+          <button type="button"
+                  class="px-4 py-1 text-xs bg-blue-600 text-white rounded">Change Logo</button>
+        </div>
+      </div>
+
+      <!-- ───────── RIGHT COLUMN (fields) ───────── -->
+      <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium mb-1">Name</label>
+          <input formControlName="username"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Phone Number</label>
+          <input formControlName="phoneNumber"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input formControlName="email"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium mb-1">Restaurant Name</label>
+          <input formControlName="restaurant_name"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Address</label>
+          <input formControlName="address"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">License_No</label>
+          <input formControlName="license_no"
+                 class="w-full border rounded px-2 py-1" />
+        </div>
+
+      </div>
+    </div>
+    <!-- Save btn -->
+    <div class="pt-6">
+      <button 
+      (click)="onBack()"
+      type="submit"
+              class="px-6 py-2 bg-green-600 text-white rounded cursor-pointer">
+        Back
+      </button>
+    </div>
+  </form>
+</div>

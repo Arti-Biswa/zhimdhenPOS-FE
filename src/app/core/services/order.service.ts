@@ -13,7 +13,7 @@ export class OrderService {
   markOrderAsCompleted(orderId: number) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = environment.orderUrl;  // e.g. 'http://192.168.1.108:8080/api/orders'
+  private baseUrl = environment.orderUrl; 
 
   constructor(private http: HttpClient) {}
 

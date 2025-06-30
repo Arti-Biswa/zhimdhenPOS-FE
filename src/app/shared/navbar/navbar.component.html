@@ -8,7 +8,7 @@
     />
 
     <!-- Hamburger Icon (Mobile only) -->
-   <button class="text-white text-2xl lg:hidden mr-10"
+   <button class="text-white text-2xl lg:hidden mr-3"
         (click)="onMenuClick()"
         aria-label="Open menu">
   <i class="fas fa-bars"></i>
@@ -20,25 +20,41 @@
         <button 
           *ngIf="currentUrl.includes('admin')" 
           (click)="goToCashier()" 
-          class="text-gray-600 hover:text-gray-700 relative mt-2 cursor-pointer"
+          class="text-gray-600 hover:text-gray-800 relative mt-10 mr-9 cursor-pointer"
           title="Go to Cashier Dashboard">
-          <i class="fas fa-cash-register text-xl"></i>
+          <i class="fas fa-cash-register text-2xl"></i>
         </button>
 
         <button 
           *ngIf="currentUrl.includes('staff/home')" 
           (click)="goToAdminDashboard()" 
-          class="text-gray-600 hover:text-gray-700 relative mt-2 cursor-pointer"
+          class="text-gray-600 hover:text-gray-800 relative mt-10 mr-9 cursor-pointer"
           title="Back to Admin Dashboard">
-          <i class="fas fa-house text-xl"></i>
+          <i class="fas fa-house text-2xl"></i>
         </button>
       </ng-container>
 
-      <button class="text-gray-600 hover:text-gray-800 relative mt-2">
-        <i class="fas fa-bell text-xl"></i>
+      <button
+      (click)="onBell()"
+       class="text-gray-600 hover:text-gray-800 relative mt-10 mr-10 cursor-pointer">
+        <i class="fas fa-bell text-2xl"></i>
         <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
       </button>
     </div>
 
+<div class="relative" (click)="toggleDropdown()" tabindex="0">
+<img
+  *ngIf="isAdmin && (logoUrl$ | async) as img"
+  [src]="img"
+  alt="Restaurant Logo"
+  class="hidden lg:block h-15 w-15 rounded-full object-cover cursor-pointer shadow lg:mt-6 lg:mr-10"
+/>
+    <div *ngIf="showDropdown"
+       class="absolute right-0 mt-2 w-50 bg-white border rounded shadow-lg z-50"
+       (click)="$event.stopPropagation()">   <!-- keep clicks inside from bubbling -->
+    <!-- Your existing small profile component -->
+    <app-profile-dropdown></app-profile-dropdown>
+  </div>
+  </div>
   </div>
 </nav>
