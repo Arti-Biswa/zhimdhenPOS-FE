@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environment';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +43,8 @@ export class ApiService {
   updateUser(id: number, userDTO: any): Observable<any> {
     return this.http.patch(`${this.baseUrl}/users/${id}`, userDTO);
   }
+  
+  getUsersByRestaurant() {
+  return this.http.get<User[]>(`${this.baseUrl}/users/by-restaurant`);
+}
 }

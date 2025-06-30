@@ -7,6 +7,8 @@ import { UserService } from './user.service';
 import { LoginModel, LoginResponseModel } from '../model/login.model';
 import { User } from '../model/user.model';
 import { SignupModel } from '../model/signup.model';
+import { environment } from '../../../../environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +16,13 @@ import { SignupModel } from '../model/signup.model';
 export class AuthService {
   private TOKEN_KEY = 'access_token';
   private REFRESH_TOKEN_KEY = 'refresh_token';
+   private baseUrl = environment.apiUrl;
 
   constructor(
     private apiService: ApiService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private http:HttpClient
   ) {}
 
   // Store tokens
@@ -79,12 +83,11 @@ export class AuthService {
         // Create a new User object from the API response
         const user: User = {
           id: response?.data?.user.id,
-          // Map other properties from the response
           email: response?.data?.user.email,
           username: response?.data?.user.email,
           role: response?.data?.user.role,
           password: '',
-          phoneNumber: ''
+          phoneNumber: response?.data?.user.phoneNumber,
         };
         
         this.userService.setCurrentUser(user);
@@ -121,4 +124,16 @@ export class AuthService {
   );
 }
 
+  forgotPassword(email: string): Observable<any> {
+    return this.apiService.post('/auth/forgot-password', { email });
+  }
+
+  resetPassword(token: string, password: string): Observable<any> {
+    return this.apiService.post('/auth/reset-password', { token, password });
+  }
+
+    getUsersByRole(role: string) {
+    return this.http.get(`${this.baseUrl}/users?role=${role}`);
+  }
+  
 }

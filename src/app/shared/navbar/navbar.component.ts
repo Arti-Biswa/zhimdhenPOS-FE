@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../core/model/user.model';
 import { Observable } from 'rxjs';
@@ -7,10 +7,12 @@ import { AuthService } from '../../core/services/auth.services';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../core/services/user.service';
 import { SidebarService } from '../../core/services/sidebar.service';
+import { RestaurantService } from '../../core/services/restaurant.service';
+import { ProfileDropdownComponent } from '../profile-dropdown/profile-dropdown.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [CommonModule,ProfileDropdownComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,13 +22,16 @@ userRole:string='';
 isAdmin:boolean=false;
 currentUrl:string='';
 isSidebarOpen:boolean=false;
+logoUrl$!: Observable<string>;   
+showDropdown = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
     private userService: UserService,
-    private sidebarService:SidebarService
+    private sidebarService:SidebarService,
+    private restaurantService:RestaurantService
 
   ) {
     this.currentUser$ = this.authService.getCurrentUser();
@@ -48,6 +53,8 @@ ngOnInit(): void {
 
     // Initial route assignment
     this.currentUrl = this.router.url;
+      this.logoUrl$ = this.restaurantService.getLogoUrl();
+
   }
 
   goToCashier(): void {
@@ -79,4 +86,19 @@ ngOnInit(): void {
   onMenuClick():void {
   this.sidebarService.toggle();
 }
+onBell(){
+  this.router.navigate(['admin/order']);
+}
+
+  toggleDropdown(): void {
+    this.showDropdown = !this.showDropdown;
+  }
+  
+  @HostListener('document:click', ['$event'])
+  onOutsideClick(event: MouseEvent): void {
+    const clickedInside = (event.target as HTMLElement).closest('.relative');
+    if (!clickedInside) {
+      this.showDropdown = false;
+    }
+  }
 }

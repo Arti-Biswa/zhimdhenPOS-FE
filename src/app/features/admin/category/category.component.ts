@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CategoryService } from '../../../core/services/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class CategoryComponent implements OnInit {
   newCategoryName = '';
   categories: { id: number; name: string }[] = [];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService,private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -36,13 +37,13 @@ export class CategoryComponent implements OnInit {
 
     this.categoryService.addCategory(newCategory).subscribe({
       next: () => {
-        alert('Category added successfully');
+        this.toastr.success('Category added successfully','Success');
         this.newCategoryName = '';
         this.loadCategories(); // reload list
       },
       error: (err) => {
-        console.error('Failed to add category:', err);
-        alert('Failed to add category');
+        console.error(err);
+  this.toastr.error('Failed to add category', 'Error');
       },
     });
   }
