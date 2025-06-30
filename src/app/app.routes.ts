@@ -17,10 +17,12 @@ import { IndexComponent } from './features/super-admin/index/index.component';
 import { RestaurantComponent } from './features/super-admin/restaurant/restaurant.component';
 import { RestListComponent } from './features/super-admin/rest-list/rest-list.component';
 import { EditComponent } from './features/super-admin/edit/edit.component';
+import { ReceiveOrderComponent } from './features/receive-order/receive-order.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'login',component:LoginComponent},
+
     {
   path: 'admin',
   canActivate: [AuthGuard],
@@ -29,7 +31,6 @@ export const routes: Routes = [
     { path: 'user', component: UserComponent },
     { path: 'user-list', component: UserListComponent },
     { path: 'user-update/:id', component: UserUpdateComponent },
-    {path:'dashboard',component:DashboardComponent},
     {path:'product',component:ProductComponent},
     { path: 'product-form', component: ProductFormComponent },
     { path: 'category', component: CategoryComponent }, 
@@ -41,8 +42,12 @@ export const routes: Routes = [
 },
     {path:'staff/home',component:HomeComponent,canActivate:[AuthGuard]},
     { path: 'menu', component: MenuComponent },
-
-
+    { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent }
+  ]
+},
+    {path:'staff/home',component:HomeComponent,canActivate:[AuthGuard]},
+     { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent },
+    {path:'menu',component:MenuComponent},
      {
   path: 'super-admin',
   canActivate: [AuthGuard],

@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { HttpEvent } from '@angular/common/http';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
-
 
 @Component({
   selector: 'app-add-table',
@@ -25,9 +25,12 @@ export class AddTableComponent {
     private qrService: QRService
   ) {}
 
+  addTable() {
+  const trimmedTableNumber = this.tableNumber.trim();
 
   addTable() {
   const trimmedTableNumber = this.tableNumber.trim();
+
   if (!trimmedTableNumber) {
     this.errorMessage = 'Table number is required.';
     this.qrImage = null;

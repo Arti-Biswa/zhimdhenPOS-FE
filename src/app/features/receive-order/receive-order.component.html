@@ -1,0 +1,44 @@
+<div class="p-6 bg-white rounded shadow mt-4 max-w-4xl mx-auto">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+    Order Details for Table {{ order?.tableId || '...' }}
+  </h2>
+
+  <table class="w-full text-sm text-gray-800 mb-4">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 text-left">Item</th>
+        <th class="p-2 text-center">Price</th>
+        <th class="p-2 text-center">Qty</th>
+        <th class="p-2 text-center">Image</th>
+        <th class="p-2 text-center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order?.items" class="border-b">
+        <td class="p-2">{{ item.itemName }}</td>
+        <td class="p-2 text-center">{{ item.price }}</td>
+        <td class="p-2 text-center">{{ item.quantity }}</td>
+       <img
+        *ngIf="item.imageUrl"
+        [src]="'http://localhost:8080' + item.imageUrl"
+        alt="{{ item.itemName }}"
+        class="w-12 h-12 rounded mx-auto shadow"
+      />
+        <td class="p-2 text-center">{{ item.price * item.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-lg font-semibold mb-4">
+    Total Amount: Nu.{{ order?.totalAmount }}
+  </div>
+
+  <div class="flex gap-4">
+    <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+      Payment
+    </button>
+    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+      Receipt
+    </button>
+  </div>
+</div>

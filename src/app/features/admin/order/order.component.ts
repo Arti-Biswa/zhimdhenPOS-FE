@@ -3,6 +3,7 @@ import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
 import { OrderService } from '../../../core/services/order.service';
@@ -15,14 +16,15 @@ import { OrderService } from '../../../core/services/order.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  tableList: { tableNumber: string }[] = [];
+ tableList: { tableNumber: string }[] = [];
   qrImages: { [key: string]: string } = {};
   newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
 
   constructor(
     private tableService: TableService,
     private qrService: QRService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -79,4 +81,19 @@ export class OrderComponent implements OnInit {
       }
     });
   }
+
+  onDeleteTable(tableNumber: string): void {
+  if (confirm(`Are you sure you want to delete table ${tableNumber}?`)) {
+    this.tableService.deleteTableByNumber(tableNumber).subscribe({
+      next: () => {
+        alert(`Table ${tableNumber} deleted successfully!`);
+        this.loadTables();
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to delete table!');
+      }
+    });
+  }
 }
+} 
