@@ -33,4 +33,8 @@ export class TableService {
   getAllTables(): Observable<{ tableNumber: string }[]> {
     return this.http.get<{ tableNumber: string }[]>(`${this.baseUrl}/list`);
   }
+
+deleteTableByNumber(tableNumber: string) {
+  return this.http.delete(`/api/tables/delete/by-number/${tableNumber}`);
+}
 }
