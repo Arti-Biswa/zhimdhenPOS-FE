@@ -7,6 +7,12 @@ import { environment } from '../../../../environment';
   providedIn: 'root'
 })
 export class OrderService {
+  getAllOrders() {
+    throw new Error('Method not implemented.');
+  }
+  markOrderAsCompleted(orderId: number) {
+    throw new Error('Method not implemented.');
+  }
   private baseUrl = environment.orderUrl;  // e.g. 'http://192.168.1.108:8080/api/orders'
 
   constructor(private http: HttpClient) {}
@@ -29,4 +35,9 @@ export class OrderService {
   markOrdersAsViewed(tableId: string | number): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/mark-viewed/${tableId}`, {});
   }
+  
+getLatestOrderByTable(tableNumber: string) {
+  return this.http.get<any>(`http://localhost:8080/api/orders/latest/${tableNumber}`);
+}
+
 }

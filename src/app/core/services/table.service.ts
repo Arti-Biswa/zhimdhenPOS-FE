@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environment';
 
+export interface Table {
+  id: number;
+  tableNumber: string;
+}
 
 export interface TableDto {
   tableNumber: string;
@@ -29,8 +33,11 @@ export class TableService {
     return this.http.post<T>(`${this.baseUrl}${endpoint}`, body, options);
   }
 
- // Fetch all table numbers from backend
-  getAllTables(): Observable<{ tableNumber: string }[]> {
-    return this.http.get<{ tableNumber: string }[]>(`${this.baseUrl}/list`);
+  getAllTables(): Observable<Table[]> {
+    return this.http.get<Table[]>(`${this.baseUrl}/list`);
   }
+
+ deleteTableById(id: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/delete/${id}`);
+}
 }
