@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Table, TableService } from '../../../core/services/table.service';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TableService } from '../../../core/services/table.service';
@@ -16,6 +18,7 @@ import { OrderService } from '../../../core/services/order.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+  tableList: Table[] = [];
  tableList: { tableNumber: string }[] = [];
   qrImages: { [key: string]: string } = {};
   newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
@@ -82,18 +85,16 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  onDeleteTable(tableNumber: string): void {
-  if (confirm(`Are you sure you want to delete table ${tableNumber}?`)) {
-    this.tableService.deleteTableByNumber(tableNumber).subscribe({
+onDeleteTable(id: number): void {
+  console.log(`Attempting to delete table ID: ${id}`); // Debug line
+  if (confirm(`Are you sure you want to delete table ID ${id}?`)) {
+    this.tableService.deleteTableById(id).subscribe({
       next: () => {
-        alert(`Table ${tableNumber} deleted successfully!`);
+        alert(`Table ID ${id} deleted successfully!`);
         this.loadTables();
       },
       error: (err) => {
-        console.error(err);
-        alert('Failed to delete table!');
-      }
-    });
+        console.error('Delete failed:', err);
   }
 }
-} 
+

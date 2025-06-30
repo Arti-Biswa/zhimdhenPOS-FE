@@ -7,6 +7,12 @@ import { environment } from '../../../../environment';
   providedIn: 'root'
 })
 export class OrderService {
+  getAllOrders() {
+    throw new Error('Method not implemented.');
+  }
+  markOrderAsCompleted(orderId: number) {
+    throw new Error('Method not implemented.');
+  }
   private baseUrl = environment.orderUrl;  // e.g. 'http://192.168.1.108:8080/api/orders'
 
   constructor(private http: HttpClient) {}

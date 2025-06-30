@@ -37,17 +37,13 @@ export const routes: Routes = [
     { path: 'update/:id', component: UpdateFormComponent },
     {path: 'add-table', component: AddTableComponent},
     {path: 'order', component: OrderComponent},
-
-  ]
-},
-    {path:'staff/home',component:HomeComponent,canActivate:[AuthGuard]},
-    { path: 'menu', component: MenuComponent },
     { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent }
   ]
 },
     {path:'staff/home',component:HomeComponent,canActivate:[AuthGuard]},
      { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent },
     {path:'menu',component:MenuComponent},
+    
      {
   path: 'super-admin',
   canActivate: [AuthGuard],

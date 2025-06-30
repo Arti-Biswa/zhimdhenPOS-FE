@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpEvent } from '@angular/common/http';
-import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { TableService } from '../../../core/services/table.service';
@@ -27,6 +26,7 @@ export class AddTableComponent {
 
   addTable() {
   const trimmedTableNumber = this.tableNumber.trim();
+
 
   addTable() {
   const trimmedTableNumber = this.tableNumber.trim();
