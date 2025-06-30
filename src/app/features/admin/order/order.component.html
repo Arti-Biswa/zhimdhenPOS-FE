@@ -19,7 +19,10 @@
      <tr *ngFor="let table of tableList"
       class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg">
       <td class="text-center">{{ table.tableNumber }}</td>
-      <td class="text-center align-middle">
+  <tr *ngFor="let table of tableList"
+  class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg">
+    <td class="text-center">{{ table.tableNumber }}</td>
+    <td class="text-center align-middle">
               <img *ngIf="qrImages[table.tableNumber]"
                    [src]="qrImages[table.tableNumber]"
                    alt="QR Code"
@@ -28,19 +31,24 @@
       <td class="text-center">
   <!-- If new orders exist, show icon and link to receive-order -->
       <button *ngIf="newOrdersCountMap[table.tableNumber] > 0"
+<td class="text-center">
+  <!-- If new orders exist, show icon and link to receive-order -->
+ <button *ngIf="newOrdersCountMap[table.tableNumber] > 0"
         [routerLink]="['/receive-order', table.tableNumber]"
         class="text-green-600 text-2xl hover:text-green-800"
         title="View Order">
   🛎️
      </button>
-
-
     <span *ngIf="!newOrdersCountMap[table.tableNumber] || newOrdersCountMap[table.tableNumber] === 0" class="text-gray-400 italic">
         No new orders
       </span>
     </td>
-
-     <!-- ✅ Delete button column -->
+  </tr>
+</tbody>
+      </table>
+    </div>
+  </main>
+</div>
   <td class="text-center">
   <button (click)="onDeleteTable(table.id)"
           class="text-red-600 hover:text-red-800 text-xl"

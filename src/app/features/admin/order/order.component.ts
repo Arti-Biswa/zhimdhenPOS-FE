@@ -4,6 +4,9 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Table, TableService } from '../../../core/services/table.service';
+import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
 import { OrderService } from '../../../core/services/order.service';
 
@@ -16,6 +19,7 @@ import { OrderService } from '../../../core/services/order.service';
 })
 export class OrderComponent implements OnInit {
   tableList: Table[] = [];
+ tableList: { tableNumber: string }[] = [];
   qrImages: { [key: string]: string } = {};
   newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
 
@@ -91,10 +95,6 @@ onDeleteTable(id: number): void {
       },
       error: (err) => {
         console.error('Delete failed:', err);
-        alert('Failed to delete table!');
-      }
-    });
   }
 }
-  }
-  
+

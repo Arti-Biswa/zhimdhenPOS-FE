@@ -27,6 +27,10 @@ export class AddTableComponent {
   addTable() {
   const trimmedTableNumber = this.tableNumber.trim();
 
+
+  addTable() {
+  const trimmedTableNumber = this.tableNumber.trim();
+
   if (!trimmedTableNumber) {
     this.errorMessage = 'Table number is required.';
     this.qrImage = null;

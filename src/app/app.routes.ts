@@ -44,7 +44,6 @@ export const routes: Routes = [
      { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent },
     {path:'menu',component:MenuComponent},
     
-    
      {
   path: 'super-admin',
   canActivate: [AuthGuard],
