@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
