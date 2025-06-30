@@ -29,4 +29,9 @@ export class OrderService {
   markOrdersAsViewed(tableId: string | number): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/mark-viewed/${tableId}`, {});
   }
+  
+getLatestOrderByTable(tableNumber: string) {
+  return this.http.get<any>(`http://localhost:8080/api/orders/latest/${tableNumber}`);
+}
+
 }
