@@ -5,6 +5,7 @@ import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { CategoryService } from '../../../core/services/category.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class CategoryComponent implements OnInit {
   newCategoryName = '';
   categories: { id: number; name: string }[] = [];
 
-  constructor(private categoryService: CategoryService,private toastr:ToastrService) {}
+  constructor(private categoryService: CategoryService,private toastr:ToastrService,private router:Router) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -38,6 +39,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.addCategory(newCategory).subscribe({
       next: () => {
         this.toastr.success('Category added successfully','Success');
+        this.router.navigate(['admin/category-list']);
         this.newCategoryName = '';
         this.loadCategories(); // reload list
       },
@@ -46,5 +48,9 @@ export class CategoryComponent implements OnInit {
   this.toastr.error('Failed to add category', 'Error');
       },
     });
+  }
+
+  onBack(){
+    this.router.navigate(['admin/category-list']);
   }
 }

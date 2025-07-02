@@ -17,7 +17,6 @@
     </button>
   </div>
 
-
   <!-- Table -->
   <div class="overflow-x-auto ">
     <table class="min-w-full text-left border border-gray-200">
@@ -32,14 +31,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of filteredUsers" class="hover:bg-gray-50 border-b border-gray-300 shadow-md">
-          <td class="py-2 px-4">{{ user.id }}</td>
-          <td class="py-2 px-4">{{ user.username }}</td>
-          <td class="py-2 px-4">{{ user.email }}</td>
-          <td class="py-2 px-4">{{ user.phoneNumber }}</td>
-          <td class="py-2 px-4">
+          <td class="py-3 px-4">{{ user.id }}</td>
+          <td class="py-3 px-4">{{ user.username }}</td>
+          <td class="py-3 px-4">{{ user.email }}</td>
+          <td class="py-3 px-4">{{ user.phoneNumber }}</td>
+          <td class="py-3 px-4">
             <button (click)="onUpdate(user.id)" class="cursor-pointer">
             <i class="fas fa-pencil-alt text-orange-600 text-lg"></i>
-              
             </button>
           </td>
         </tr>

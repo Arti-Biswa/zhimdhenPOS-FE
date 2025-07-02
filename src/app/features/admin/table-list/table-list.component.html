@@ -1,0 +1,46 @@
+<div class="flex flex-col min-h-screen bg-[#fefccf]">
+  <app-navbar class="z-10"></app-navbar>
+  <app-sidebar class="z-10"></app-sidebar>
+  <main class="flex-1 p-6 lg:ml-64 overflow-hidden ">
+    <div class="overflow-x-auto px-4">
+        <div class="flex justify-end">
+<button
+    (click)="onAdd()"
+    class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-[#12BAB7]">
+    Add Table
+  </button>
+    </div>
+      <table
+        class="w-full text-sm text-gray-700"
+        style="border-collapse: separate; border-spacing: 0 6px; table-layout: fixed;"
+      >
+        <thead class="bg-gray-300 text-gray-600 font-semibold rounded-lg">
+          <tr>
+            <th class="px-4 py-3 break-words text-center">Table Number</th>
+            <th class="px-4 py-3 break-words text-center">QR Code</th>
+             <th class="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+       <tbody>
+  <tr *ngFor="let table of tableList" class="hover:bg-gray-50 border-b border-gray-300 shadow-md">
+    <td class="text-center">{{ table.tableNumber }}</td>
+    <td class="text-center align-middle">
+    <img *ngIf="qrImages[table.tableNumber]"
+        [src]="qrImages[table.tableNumber]"
+        alt="QR Code"
+        class="w-24 h-24 border rounded shadow mx-auto" />
+     </td>
+    
+      <td class="text-center">
+        <button class="text-red-600 hover:text-red-800 text-xl">
+                <i class="fas fa-print tex-xl text-gray-800 cursor-pointer"></i>
+
+        </button>
+      </td>
+    
+  </tr>
+</tbody>
+      </table>
+    </div>
+  </main>
+</div>

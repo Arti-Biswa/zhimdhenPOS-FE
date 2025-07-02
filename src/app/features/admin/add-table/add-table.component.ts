@@ -6,6 +6,8 @@ import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-table',
@@ -21,7 +23,9 @@ export class AddTableComponent {
 
   constructor(
     private tableService: TableService,
-    private qrService: QRService
+    private qrService: QRService,
+    private toastr:ToastrService,
+    private router:Router
   ) {}
 
 
@@ -39,7 +43,8 @@ export class AddTableComponent {
   // Call backend to add table
   this.tableService.post<HttpEvent<any>>('/add', { tableNumber: trimmedTableNumber }).subscribe({
     next: () => {
-      alert('Table added successfully!');
+      this.toastr.success('Table added successfully!','Success');
+      this.router.navigate(['admin/table-list']);
       this.tableNumber = ''; // reset input
 
       // Use trimmedTableNumber as string directly since backend expects string
@@ -63,5 +68,8 @@ export class AddTableComponent {
       this.qrImage = null;
     }
   });
+}
+onBack(){
+  this.router.navigate(['admin/category-list']);
 }
 }
