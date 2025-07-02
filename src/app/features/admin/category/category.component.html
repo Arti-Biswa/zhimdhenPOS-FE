@@ -2,8 +2,11 @@
   <app-navbar class="z-10"></app-navbar>
   <app-sidebar class="z-10"></app-sidebar>
   <main class="flex-1 lg:ml-64 p-6 overflow-y-auto bg-[#F2F2CB]">
+    <button (click)="onBack()" class="cursor-pointer">
+      <i class="fas fa-arrow-left text-lg ml-8"></i>        
+    </button>
     <div class="flex justify-center items-start flex-grow">
-      <div class="bg-white shadow-md p-6 rounded-lg w-96 mt-35">
+      <div class="bg-white shadow-md p-6 rounded-lg w-96 mt-25">
         <form (ngSubmit)="onAddCategory()" #categoryForm="ngForm">
           <label for="categoryName" class="block mb-2 text-gray-700 font-semibold">Category Name</label>
           <input
@@ -18,7 +21,7 @@
           <button
             type="submit"
             [disabled]="categoryForm.invalid"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
+            class="w-full bg-blue-500 hover:bg-[#12BAB7] text-white py-2 rounded cursor-pointer"
           >
             Add
           </button>

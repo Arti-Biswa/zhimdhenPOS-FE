@@ -1,64 +1,38 @@
 <div class="flex flex-col min-h-screen bg-[#fefccf]">
   <app-navbar class="z-10"></app-navbar>
   <app-sidebar class="z-10"></app-sidebar>
-  <main class="flex-1 p-6 lg:ml-64 overflow-hidden ">
-    <div class="overflow-x-auto px-4">
-      <table
-        class="w-full text-sm text-gray-700"
-        style="border-collapse: separate; border-spacing: 0 6px; table-layout: fixed;"
-      >
-        <thead class="bg-[#f3f4f6] text-gray-800 font-semibold rounded-lg">
-          <tr>
-            <th class="px-4 py-3 break-words text-center">Table Number</th>
-            <th class="px-4 py-3 break-words text-center">QR Code</th>
-             <th class="px-4 py-3 break-words text-center">New Order</th>
-             <th class="px-4 py-3 text-center">Actions</th>
-          </tr>
-        </thead>
-       <tbody>
-     <tr *ngFor="let table of tableList"
-      class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg">
-      <td class="text-center">{{ table.tableNumber }}</td>
-  <tr *ngFor="let table of tableList"
-  class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg">
-    <td class="text-center">{{ table.tableNumber }}</td>
-    <td class="text-center align-middle">
-              <img *ngIf="qrImages[table.tableNumber]"
-                   [src]="qrImages[table.tableNumber]"
-                   alt="QR Code"
-                   class="w-24 h-24 border rounded shadow mx-auto" />
-            </td>
-      <td class="text-center">
-  <!-- If new orders exist, show icon and link to receive-order -->
-      <button *ngIf="newOrdersCountMap[table.tableNumber] > 0"
-<td class="text-center">
-  <!-- If new orders exist, show icon and link to receive-order -->
- <button *ngIf="newOrdersCountMap[table.tableNumber] > 0"
-        [routerLink]="['/receive-order', table.tableNumber]"
-        class="text-green-600 text-2xl hover:text-green-800"
-        title="View Order">
-  🛎️
-     </button>
-    <span *ngIf="!newOrdersCountMap[table.tableNumber] || newOrdersCountMap[table.tableNumber] === 0" class="text-gray-400 italic">
-        No new orders
-      </span>
-    </td>
-  </tr>
-</tbody>
-      </table>
-    </div>
-  </main>
-</div>
-  <td class="text-center">
-  <button (click)="onDeleteTable(table.id)"
-          class="text-red-600 hover:text-red-800 text-xl"
-          title="Delete Table">
-    🗑️
-  </button>
-</td>
-  </tr>
-</tbody>
-      </table>
-    </div>
-  </main>
+  <main class="flex-1 lg:ml-64 p-6 overflow-y-auto bg-[#F2F2CB]">
+      <div class="overflow-x-auto">
+    <table
+      class="w-full text-sm text-gray-700"
+      style="border-collapse: separate; border-spacing: 0 6px; table-layout: fixed;"
+    >
+      <thead class="bg-[#f3f4f6] text-gray-800 font-semibold rounded-lg">
+        <tr>
+          <th class="px-2 py-6 break-words text-center">Table Number</th>
+          <th class="px-2 py-6 break-words text-center">New Order</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let table of tableList"
+            class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg">
+          <td class=" px-4 text-center">{{ table.tableNumber }}</td>
+          <td class=" px-4text-center">
+            <button *ngIf="newOrdersCountMap[table.tableNumber] > 0"
+                    [routerLink]="['/receive-order', table.tableNumber]"
+                    class="text-green-600 text-2xl hover:text-green-800"
+                    title="View Order">
+              🛎️
+            </button>
+            <span *ngIf="!newOrdersCountMap[table.tableNumber] || newOrdersCountMap[table.tableNumber] === 0"
+                  class="text-gray-400 italic">
+              No new orders
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
 </div>

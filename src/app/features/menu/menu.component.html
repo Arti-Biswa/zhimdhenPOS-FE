@@ -1,18 +1,4 @@
-<!-- Outer wrapper with max width and center -->
 <div class="max-w-7xl mx-auto p-6">
-  <!-- Category Filter Dropdown -->
-  <div class="mb-6">
-    <label for="category" class="block mb-2 text-sm font-medium text-gray-700">Filter by Category</label>
-    <select
-      [(ngModel)]="selectedCategoryId"
-      (change)="onSelectCategory(selectedCategoryId)"
-      id="category"
-      class="px-4 py-2 rounded border border-gray-300 focus:ring focus:ring-green-300 focus:outline-none"
-    >
-      <option [value]="0">All Categories</option>
-      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-    </select>
-  </div>
     <!-- Content Wrapper -->
     <div class="p-6">
 
@@ -30,20 +16,11 @@
         </select>
       </div>
 
-      <!-- Products Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div *ngFor="let product of filteredProducts" class="bg-white p-5 shadow rounded">
-
-        <img *ngIf="product.image"
-          [src]="'http://192.168.1.106:8080' + product.image"
-           alt="{{ product.name }}"
-           class="h-40 w-full object-cover rounded mb-3" />
-
   <!-- Products Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
     <div *ngFor="let product of filteredProducts" class="bg-white p-5 shadow rounded">
       <img *ngIf="product.image"
-        [src]="'http://192.168.1.108:8080' + product.image"
+        [src]="'http://192.168.1.115:8080' + product.image"
         alt="{{ product.name }}"
         class="h-40 w-full object-cover rounded mb-3" />
 
@@ -94,7 +71,7 @@
           </td>
           <td class="p-2">
             <img *ngIf="item.image"
-              [src]="'http://192.168.1.108:8080' + item.image"
+              [src]="'http://192.168.1.115:8080' + item.image"
               alt="{{ item.name }}"
               class="w-10 h-10 object-cover rounded mx-auto" />
           </td>

@@ -14,14 +14,12 @@ import { OrderService } from '../../../core/services/order.service';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
-  tableList: Table[] = [];
-  qrImages: { [key: string]: string } = {};
-  newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
+export class OrderComponent{
+   tableList: Table[] = [];
+  newOrdersCountMap: { [tableNumber: string]: number } = {}; // tableNumber as key
 
   constructor(
     private tableService: TableService,
-    private qrService: QRService,
     private orderService: OrderService,
     private route: ActivatedRoute
   ) {}
@@ -34,22 +32,6 @@ export class OrderComponent implements OnInit {
     this.tableService.getAllTables().subscribe({
       next: (tables) => {
         this.tableList = tables;
-
-        this.tableList.forEach(table => {
-          this.qrService.getQRCode(table.tableNumber).subscribe({
-            next: (blob) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                this.qrImages[table.tableNumber] = reader.result as string;
-              };
-              reader.readAsDataURL(blob);
-            },
-            error: (error) => {
-              console.error('Failed to load QR for table ${table.tableNumber}', error);
-            }
-          });
-        });
-
         this.loadNewOrdersCount();
       },
       error: (err) => {
@@ -61,7 +43,6 @@ export class OrderComponent implements OnInit {
   loadNewOrdersCount(): void {
     this.orderService.getNewOrdersCount().subscribe({
       next: (countMap) => {
-        // Here we assume backend keys are tableNumbers (strings)
         this.newOrdersCountMap = countMap;
       },
       error: (err) => {
@@ -81,20 +62,4 @@ export class OrderComponent implements OnInit {
     });
   }
 
-onDeleteTable(id: number): void {
-  console.log(`Attempting to delete table ID: ${id}`);
-
-  if (confirm(`Are you sure you want to delete table ID ${id}?)`)){
-    this.tableService.deleteTableById(id).subscribe({
-      next: () => {
-        alert(`Table ID ${id} deleted successfully!`);
-        this.loadTables();
-      },
-      error: (err) => {
-        console.error('Delete failed:', err);
-        alert('Failed to delete table!');
-      }
-    });
-  }
 }
-  }

@@ -60,4 +60,8 @@ export class ProductFormComponent implements OnInit {
 });
 
   }
+
+  onBack(){
+    this.router.navigate(['admin/product']);
+  }
 }

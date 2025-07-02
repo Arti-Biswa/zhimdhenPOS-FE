@@ -22,6 +22,9 @@ import { ForgotPasswordComponent } from './features/forgot-password/forgot-passw
 import { ResetPasswordComponent } from './features/reset-password/reset-password.component';
 import { UserProfileComponent } from './shared/user-profile/user-profile.component';
 import { ProfileComponent } from './features/super-admin/profile/profile.component';
+import { TableListComponent } from './features/admin/table-list/table-list.component';
+import { CategoryListComponent } from './features/admin/category-list/category-list.component';
+import { CategoryEditComponent } from './features/admin/category-edit/category-edit.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -37,9 +40,12 @@ export const routes: Routes = [
     { path: 'user-update/:id', component: UserUpdateComponent },
     {path:'product',component:ProductComponent},
     { path: 'product-form', component: ProductFormComponent },
+    {path:'category-list',component:CategoryListComponent},
     { path: 'category', component: CategoryComponent }, 
+    {path:'category-edit/:id',component:CategoryEditComponent},
     { path: 'update/:id', component: UpdateFormComponent },
-    {path: 'add-table', component: AddTableComponent},
+    {path: 'table-list', component: TableListComponent},
+    {path:'add-table',component:AddTableComponent},
     {path: 'order', component: OrderComponent},
     { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent }
   ]
