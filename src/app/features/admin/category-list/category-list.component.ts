@@ -24,7 +24,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    this.categoryService.getCategories().subscribe(data => {
+    this.categoryService.getCategoryByRestaurant().subscribe(data => {
       this.categories = data;
       this.filteredCategory = data;       
     });

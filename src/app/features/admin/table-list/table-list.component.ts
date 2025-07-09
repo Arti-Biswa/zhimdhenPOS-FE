@@ -30,7 +30,7 @@ export class TableListComponent implements OnInit {
   }
 
   loadTables(): void {
-    this.tableService.getAllTables().subscribe({
+    this.tableService.getTableByRestaurant().subscribe({
       next: (tables) => {
         this.tableList = tables;
 

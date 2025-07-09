@@ -94,7 +94,6 @@ onSubmit(): void {
   });
 }
 
-// Getter for easy access to form fields
 get f() {
   return this.loginForm.controls;
 }
