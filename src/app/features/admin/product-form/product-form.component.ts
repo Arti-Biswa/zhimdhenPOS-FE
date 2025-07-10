@@ -25,7 +25,7 @@ export class ProductFormComponent implements OnInit {
   constructor(private productService: ProductService,private toastr:ToastrService,private router:Router) {}
 
   ngOnInit() {
-    this.productService.getCategories().subscribe({
+    this.productService.getCategoriesByRestaurant().subscribe({
       next: (data) => (this.categories = data),
       error: (err: HttpErrorResponse) => console.error('Failed to load categories', err),
     });

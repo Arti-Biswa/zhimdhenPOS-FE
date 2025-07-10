@@ -50,7 +50,6 @@
       <th class="p-2 w-[25%]">Product</th>
       <th class="p-2 w-[15%]">Price</th>
       <th class="p-2 w-[22%]">Quantity</th>
-      <th class="p-2 w-[18%]">Image</th>
       <th class="p-2 w-[20%]">Total</th>
       </tr>
      </thead>
@@ -69,12 +68,7 @@
               <button class="px-1 py-1 bg-gray-200 rounded text-sm" (click)="increaseQuantity(item)">+</button>
             </div>
           </td>
-          <td class="p-2">
-            <img *ngIf="item.image"
-              [src]="'http://192.168.1.115:8080' + item.image"
-              alt="{{ item.name }}"
-              class="w-10 h-10 object-cover rounded mx-auto" />
-          </td>
+        
           <td class="p-2 whitespace-nowrap">
             <span class="block text-sm">{{ item.price * item.quantity | currency:'Nu' }}</span>
           </td>

@@ -32,5 +32,8 @@ addCategory(category: { name: string }): Observable<any> {
 getCategoryById(id: number) {
   return this.http.get<{ id: number; name: string }>(`${this.catUrl}/${id}`);
 }
+getCategoryByRestaurant(){
+  return this.http.get<any[]>(`${this.catUrl}/by-restaurant`);
+}
 
 }

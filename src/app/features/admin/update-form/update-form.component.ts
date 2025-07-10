@@ -39,7 +39,7 @@ export class UpdateFormComponent implements OnInit {
   }
 
   loadProduct(id: number): void {
-    this.productService.getProducts().subscribe((products) => {
+    this.productService.getProductsByRestaurant().subscribe((products) => {
       const found = products.find(p => p.id === id);
       if (found) {
         this.selectedProduct = found;
