@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   selectedTableId: string | null = null;
+  selectedRestaurantId:number|null=null;
 
   categories: any[] = [];
   products: any[] = [];
@@ -34,38 +35,35 @@ export class MenuComponent implements OnInit {
     private orderService: OrderService
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.selectedTableId = params['table'] || null;
-      console.log('Selected table:', this.selectedTableId);
-    });
+ ngOnInit(): void {
+  this.route.queryParams.subscribe(params => {
+    // use the exact parameter names from the URL
+    this.selectedRestaurantId = params['restaurantId'] ? Number(params['restaurantId']) : null;
+    this.selectedTableId      = params['tableId']      || null;
 
-    this.loadCategories();
-    this.loadProducts();
-  }
+    if (!this.selectedRestaurantId) {
+      console.error('Restaurant ID is missing');
+      return;
+    }
+    this.loadCategories(this.selectedRestaurantId);
+    this.loadProducts(this.selectedRestaurantId);
+  });
+}
 
-  loadCategories(): void {
-    this.productService.getCategories().subscribe({
-      next: (categories) => this.categories = categories,
-      error: (error) => {
-        console.error('Failed to load categories:', error);
-        alert('Failed to load categories');
-      }
-    });
-  }
 
-  loadProducts(): void {
-    this.productService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-        this.filterProducts();
-      },
-      error: (error) => {
-        console.error('Failed to load products:', error);
-        alert('Failed to load products');
-      }
-    });
-  }
+loadCategories(restaurantId: number) {
+  this.productService.getCategories(restaurantId).subscribe({
+    next: cats => this.categories = cats,
+    error: err => console.error('Failed to load categories', err)
+  });
+}
+
+loadProducts(restaurantId: number) {
+  this.productService.getProducts(restaurantId).subscribe({
+    next: prods => { this.products = prods; this.filterProducts(); },
+    error: err => console.error('Failed to load products', err)
+  });
+}
 
   filterProducts(): void {
     const categoryIdNum = Number(this.selectedCategoryId);

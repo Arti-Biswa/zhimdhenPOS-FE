@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
 
   loadCategories() {
     this.isLoadingCategories = true;
-    this.productService.getCategories().subscribe({
+    this.productService.getCategoriesByRestaurant().subscribe({
       next: (data) => {
         this.categories = data;
         this.isLoadingCategories = false;
@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
     });
   }
 loadProducts() {
-  this.productService.getProducts().subscribe({
+  this.productService.getProductsByRestaurant().subscribe({
     next: (res) => {
       console.log('Products:', res);
       this.products = res;
@@ -75,6 +75,7 @@ loadProducts() {
   onAddProduct() {
     this.router.navigate(['/admin/product-form']);
   }
+
 onDelete(productId: number): void {
   const confirmDelete = confirm('Are you sure you want to delete this product?');
   if (confirmDelete) {
