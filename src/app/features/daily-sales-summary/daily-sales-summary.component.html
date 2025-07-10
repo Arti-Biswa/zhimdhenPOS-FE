@@ -1,0 +1,58 @@
+<div class="flex flex-col min-h-screen bg-[#fefccf]">
+  <app-navbar class="z-10"></app-navbar>
+  <app-sidebar class="z-10"></app-sidebar>
+  <main class="flex-1 lg:ml-64 p-6 overflow-y-auto bg-[#F2F2CB]">
+    <div class="overflow-x-auto">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Daily Sales Summary</h2>
+
+      <label for="date" class="block mb-2 font-medium text-gray-700">Select Date:</label>
+      <input
+        type="date"
+        id="date"
+        [(ngModel)]="selectedDate"
+        (change)="fetchSalesSummary()"
+        class="mb-6 p-2 border rounded w-48"
+      />
+
+      <table
+        class="w-full text-sm text-gray-700"
+        style="border-collapse: separate; border-spacing: 0 6px; table-layout: fixed;"
+      >
+        <thead class="bg-[#f3f4f6] text-gray-800 font-semibold rounded-lg">
+          <tr>
+            <th class="px-2 py-6 break-words text-center">Item Name</th>
+            <th class="px-2 py-6 break-words text-center">Quantity Sold</th>
+            <th class="px-2 py-6 break-words text-center">Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let sale of sales"
+            class="transition transform hover:scale-105 hover:shadow-lg duration-200 bg-white rounded-lg"
+          >
+            <td class="px-4 text-center">{{ sale.itemName }}</td>
+            <td class="px-4 text-center">{{ sale.quantity }}</td>
+            <td class="px-4 text-center">Nu. {{ sale.totalAmount | number:'1.2-2' }}</td>
+          </tr>
+          <tr class="font-semibold bg-white rounded-lg border-t border-gray-300">
+            <td class="px-4 text-center">Total</td>
+            <td class="px-4 text-center">{{ totalQuantity }}</td>
+            <td class="px-4 text-center">Nu. {{ totalAmount | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!loading && sales.length === 0" class="text-gray-400 italic mt-4 text-center">
+        No sales data found for this date.
+      </div>
+
+      <div *ngIf="loading" class="text-gray-500 mt-4 text-center">
+        Loading...
+      </div>
+
+      <div *ngIf="error" class="text-red-600 mt-4 text-center">
+        {{ error }}
+      </div>
+    </div>
+  </main>
+</div>

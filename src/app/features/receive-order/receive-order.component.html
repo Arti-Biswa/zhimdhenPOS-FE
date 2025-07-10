@@ -34,11 +34,10 @@
   </div>
 
   <div class="flex gap-4">
-    <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+    <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+    routerLink="/pay"
+     [state]="{ order: order }">
       Pay
     </button>
-    <!-- <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-      Receipt
-    </button> -->
   </div>
 </div>

@@ -1,0 +1,36 @@
+<div class="receipt-container p-4 font-mono">
+  <h1>Payment Receipt</h1>
+  <p>Table: {{ order?.tableId }}</p>
+
+  <table class="w-full border-collapse border">
+    <thead>
+      <tr>
+        <th class="border px-2">Item</th>
+        <th class="border px-2">Price</th>
+        <th class="border px-2">Qty</th>
+        <th class="border px-2">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order?.items">
+        <td class="border px-2">{{ item.itemName }}</td>
+        <td class="border px-2 text-right">{{ item.price | number:'1.2-2' }}</td>
+        <td class="border px-2 text-center">{{ item.quantity }}</td>
+        <td class="border px-2 text-right">{{ (item.price * item.quantity) | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Total Amount:</strong> Nu.{{ amount || order?.totalAmount | number:'1.2-2' }}</p>
+
+  <h3 class="mt-4">Payment Details:</h3>
+  <p><strong>Method:</strong> 
+    {{ paymentMethod === 'cash' ? 'Cash' : (paymentMethod === 'bank' ? 'Bank Transfer' : '-') }}
+  </p>
+
+  <p *ngIf="paymentMethod === 'bank'"><strong>Bank:</strong> {{ transferType }}</p>
+  <p *ngIf="journalNo"><strong>Journal No:</strong> {{ journalNo }}</p>
+  <p><strong>Remarks:</strong> {{ remarks || '-' }}</p>
+
+  <p class="mt-4">Thank you for your order!</p>
+</div>
