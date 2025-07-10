@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core'; // ✅ ADDED OnInit here
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { OrderService } from '../../core/services/order.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-receive-order',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './receive-order.component.html',
   styleUrl: './receive-order.component.css'
 })
-export class ReceiveOrderComponent implements OnInit { // ✅ ADDED implements OnInit here
+export class ReceiveOrderComponent implements OnInit { 
 
   order: any = null;
 
@@ -19,12 +19,12 @@ export class ReceiveOrderComponent implements OnInit { // ✅ ADDED implements O
     private orderService: OrderService
   ) {}
 
-  ngOnInit(): void { // ✅ FIXED: This now works because OnInit is implemented
+  ngOnInit(): void { 
     const tableNumber = this.route.snapshot.paramMap.get('tableNumber');
     if (tableNumber) {
       this.fetchOrder(tableNumber);
     } else {
-      console.error('❌ Table number not found in URL');
+      console.error('Table number not found in URL');
     }
   }
 
