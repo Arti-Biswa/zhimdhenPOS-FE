@@ -7,7 +7,7 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { TableService } from '../../../core/services/table.service';
 import { QRService } from '../../../core/services/qr.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-table',
@@ -19,13 +19,16 @@ import { Router } from '@angular/router';
 export class AddTableComponent {
   tableNumber: string = '';
   errorMessage: string = '';
-  qrImage: string | null = null;  // Holds base64 QR image data
+  qrImage: string | null = null;  
+  restaurantId!:number;
 
   constructor(
     private tableService: TableService,
     private qrService: QRService,
     private toastr:ToastrService,
-    private router:Router
+    private router:Router,
+    private route: ActivatedRoute   // add this
+
   ) {}
 
 
@@ -48,7 +51,7 @@ export class AddTableComponent {
       this.tableNumber = ''; // reset input
 
       // Use trimmedTableNumber as string directly since backend expects string
-      this.qrService.getQRCode(trimmedTableNumber).subscribe({
+      this.qrService.getQRCode(trimmedTableNumber, this.restaurantId).subscribe({
         next: (blob) => {
           const reader = new FileReader();
           reader.onload = () => {

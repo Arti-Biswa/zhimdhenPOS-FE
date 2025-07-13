@@ -18,7 +18,7 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   placeOrder(order: {
-    tableId: string;  // if your backend expects number, consider using number type
+    tableId: string; 
     items: { productId: number; quantity: number }[];
   }): Observable<any> {
     return this.http.post(this.baseUrl, order);
@@ -37,7 +37,11 @@ export class OrderService {
   }
   
 getLatestOrderByTable(tableNumber: string) {
-  return this.http.get<any>(`http://localhost:8080/api/orders/latest/${tableNumber}`);
+  return this.http.get<any>(`${this.baseUrl}/latest/${tableNumber}`);
+}
+
+getMyRestaurantOrders(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrl}/by-restaurant`);
 }
 
 }

@@ -16,7 +16,8 @@ import { SidebarComponent } from '../../../shared/sidebar/sidebar.component';
 export class TableListComponent implements OnInit {
   tableList: Table[] = [];
   qrImages: { [key: string]: string } = {};
-  newOrdersCountMap: { [tableNumber: string]: number } = {}; // use tableNumber as key
+  newOrdersCountMap: { [tableNumber: string]: number } = {}; 
+  restaurantId!:number;
 
   constructor(
     private tableService: TableService,
@@ -30,30 +31,36 @@ export class TableListComponent implements OnInit {
   }
 
   loadTables(): void {
-    this.tableService.getTableByRestaurant().subscribe({
-      next: (tables) => {
-        this.tableList = tables;
+  this.tableService.getTableByRestaurant().subscribe({
+    next: (tables) => {
+      this.tableList = tables;
 
-        this.tableList.forEach(table => {
-          this.qrService.getQRCode(table.tableNumber).subscribe({
-            next: (blob) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                this.qrImages[table.tableNumber] = reader.result as string;
-              };
-              reader.readAsDataURL(blob);
-            },
-            error: (error) => {
-              console.error('Failed to load QR for table ${table.tableNumber}', error);
-            }
-          });
+      this.tableList.forEach(table => {
+      const restaurantId = table.restaurant?.id ?? table.restaurantId;
+        if (!restaurantId) {
+          console.warn(`Missing restaurant.id for table ${table.tableNumber}`);
+          return;
+        }
+
+        this.qrService.getQRCode(table.tableNumber, restaurantId).subscribe({
+          next: (blob) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              this.qrImages[table.tableNumber] = reader.result as string;
+            };
+            reader.readAsDataURL(blob);
+          },
+          error: (error) => {
+            console.error(`Failed to load QR for table ${table.tableNumber}`, error);
+          }
         });
-      },
-      error: (err) => {
-        console.error('Error fetching tables:', err);
-      }
-    });
-  }
+      });
+    },
+    error: (err) => {
+      console.error('Error fetching tables:', err);
+    }
+  });
+}
 
    onAdd(){
     this.router.navigate(['admin/add-table'])

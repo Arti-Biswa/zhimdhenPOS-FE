@@ -37,7 +37,6 @@ export class MenuComponent implements OnInit {
 
  ngOnInit(): void {
   this.route.queryParams.subscribe(params => {
-    // use the exact parameter names from the URL
     this.selectedRestaurantId = params['restaurantId'] ? Number(params['restaurantId']) : null;
     this.selectedTableId      = params['tableId']      || null;
 
@@ -49,7 +48,6 @@ export class MenuComponent implements OnInit {
     this.loadProducts(this.selectedRestaurantId);
   });
 }
-
 
 loadCategories(restaurantId: number) {
   this.productService.getCategories(restaurantId).subscribe({
@@ -131,6 +129,7 @@ loadProducts(restaurantId: number) {
 
     const payload = {
       tableId: this.selectedTableId,
+      restaurantId:this.selectedRestaurantId,
       items: this.tableCartItems.map(item => ({
         productId: item.id,
         quantity: item.quantity

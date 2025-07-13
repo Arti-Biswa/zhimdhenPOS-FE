@@ -6,10 +6,16 @@ import { environment } from '../../../../environment';
 export interface Table {
   id: number;
   tableNumber: string;
+  restaurant?: {
+    id: number;
+  };
+  restaurantId?: number;
 }
+
 
 export interface TableDto {
   tableNumber: string;
+    restaurantId:number;
 }
 
 @Injectable({
