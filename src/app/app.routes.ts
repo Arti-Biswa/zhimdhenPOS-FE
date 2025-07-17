@@ -25,6 +25,9 @@ import { ProfileComponent } from './features/super-admin/profile/profile.compone
 import { TableListComponent } from './features/admin/table-list/table-list.component';
 import { CategoryListComponent } from './features/admin/category-list/category-list.component';
 import { CategoryEditComponent } from './features/admin/category-edit/category-edit.component';
+import { PayComponent } from './features/pay/pay.component';
+import { PaymentReceiptComponent } from './features/payment-receipt/payment-receipt.component';
+import { DailySalesSummaryComponent } from './features/daily-sales-summary/daily-sales-summary.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
@@ -47,6 +50,7 @@ export const routes: Routes = [
     {path: 'table-list', component: TableListComponent},
     {path:'add-table',component:AddTableComponent},
     {path: 'order', component: OrderComponent},
+    {path: 'order', component: PaymentReceiptComponent},
     { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent }
   ]
 },
@@ -54,6 +58,9 @@ export const routes: Routes = [
     { path: 'receive-order/:tableNumber', component: ReceiveOrderComponent },
     {path:'menu',component:MenuComponent},
     {path:'shared/user-profile',component:UserProfileComponent,canActivate:[AuthGuard]},
+    {path: 'pay', component: PayComponent},
+    {path: 'payment-receipt', component: PaymentReceiptComponent},
+    {path: 'daily-sales', component: DailySalesSummaryComponent},
 
 {
   path: 'super-admin',
