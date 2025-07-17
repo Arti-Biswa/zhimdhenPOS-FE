@@ -20,15 +20,16 @@ tableList: Table[] = [];
     private route: ActivatedRoute
   ) {}
 
+ 
   ngOnInit(): void {
     this.loadTables();
+    this.loadNewOrdersCount(); // ✅ no restaurantId needed now
   }
 
-  loadTables(): void {
-    this.tableService.getAllTables().subscribe({
+loadTables(): void {
+    this.tableService.getTableByRestaurant().subscribe({
       next: (tables) => {
         this.tableList = tables;
-        this.loadNewOrdersCount();
       },
       error: (err) => {
         console.error('Error fetching tables:', err);
@@ -37,7 +38,7 @@ tableList: Table[] = [];
   }
 
   loadNewOrdersCount(): void {
-    this.orderService.getNewOrdersCount().subscribe({
+    this.orderService.getNewOrdersCount().subscribe({ // ✅ no param
       next: (countMap) => {
         this.newOrdersCountMap = countMap;
       },
@@ -47,29 +48,4 @@ tableList: Table[] = [];
     });
   }
 
-  markAsViewed(tableNumber: string): void {
-    this.orderService.markOrdersAsViewed(tableNumber).subscribe({
-      next: () => {
-        this.newOrdersCountMap[tableNumber] = 0;
-      },
-      error: (err) => {
-        console.error(`Error marking orders as viewed for table ${tableNumber}:`, err);
-      }
-    });
-  }
-
-  onDeleteTable(id: number): void {
-  if (confirm(`Are you sure you want to delete table ID ${id}?`)) {
-    this.tableService.deleteTableById(id).subscribe({
-      next: () => {
-        alert(`Table ID ${id} deleted successfully!`);
-        this.loadTables();
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Failed to delete table!');
-      }
-    });
-    }
-  }
 }

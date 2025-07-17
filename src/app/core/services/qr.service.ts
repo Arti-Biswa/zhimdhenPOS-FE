@@ -6,12 +6,13 @@ import { environment } from '../../../../environment';
   providedIn: 'root'
 })
 export class QRService {
-  private baseUrl = environment.qrcodeUrl;  // define baseUrl here
+  private baseUrl = environment.qrcodeUrl;  
 
   constructor(private http: HttpClient) {}
 
-  getQRCode(tableId: string) {
-    const url = `${this.baseUrl}${encodeURIComponent(tableId)}`;
-    return this.http.get(url, { responseType: 'blob' });
-  }
+ getQRCode(tableNumber: string, restaurantId: number) {
+  const url = `${this.baseUrl}?tableNumber=${encodeURIComponent(tableNumber)}&restaurantId=${restaurantId}`;
+  return this.http.get(url, { responseType: 'blob' });
+}
+
 }
